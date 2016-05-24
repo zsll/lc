@@ -22,6 +22,6 @@ public class Solution extends VersionControl {
         			start = mid; 
         	}
         }
-        return end;
+        return start;
     }
 }
