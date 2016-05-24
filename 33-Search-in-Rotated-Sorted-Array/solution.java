@@ -8,34 +8,19 @@ public class Solution {
 			int m = (l + r) / 2;
 			if (A[m] == target)
 				return m;
-			if (A[m] > A[l]) {
+			if (A[m] >= A[l]) {
 				if (A[m] > target && A[l] <= target) {
 					r = m - 1;
 				} else {
 					l = m + 1;
-				}
-			} else if (A[m] < A[l]) {
-				if (A[m] < target && A[r] >= target) {
-					l = m + 1;
-				} else {
-					r = m - 1;
-				}
-			} else if (A[m] > A[r]) {
-				if (A[m] > target && A[l] <= target) {
-					r = m - 1;
-				} else {
-					l = m + 1;
-				}
-			} else if (A[m] < A[r]) {
-				if (A[m] < target && A[r] >= target) {
-					l = m + 1;
-				} else {
-					r = m - 1;
 				}
 			} else {
-			    l++;
-			    r--;
-			}
+				if (A[m] < target && A[r] >= target) {
+					l = m + 1;
+				} else {
+					r = m - 1;
+				}
+			} 
 		}
 		return -1;
     }
