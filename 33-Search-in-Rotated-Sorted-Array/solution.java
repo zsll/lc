@@ -32,7 +32,10 @@ public class Solution {
 				} else {
 					r = m - 1;
 				}
-			} 
+			} else {
+			    l++;
+			    r--;
+			}
 		}
 		return -1;
     }
