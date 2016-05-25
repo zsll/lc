@@ -13,6 +13,7 @@ public class Solution {
 			   }
 		   } else {
 			   res = false;
+			   break;
 		   }
 	   }
    }
