@@ -8,7 +8,7 @@ public class Solution {
 			   if(maxReach < i + nums[i]) {
 				   maxReach = i + nums[i];
 			   }
-			   if(maxReach >= nums.length) {
+			   if(maxReach >= nums.length - 1) {
 				   break;
 			   }
 		   } else {
