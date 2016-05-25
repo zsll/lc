@@ -1,17 +1,24 @@
 public class Solution {
     public int hIndex(int[] citations) {
        int res = 0;
-        if(citations != null && citations.length > 0) {
-        	Arrays.sort(citations);
-        	for(int i = citations.length - 1; i >= 0; i--) {
-        		int artNum = citations.length - i;
-        		if(citations[i] >= artNum) {
-        			res = artNum;
-        		} else {
-        			break;
-        		}
-        	}
-        }
-        return res;
+    	if(citations != null && citations.length > 0) {
+    		int len = citations.length;
+    		int [] cnt = new int[len + 1];
+    		for(int i = 0; i < len; i++) {
+    			int index = citations[i] > len ? len : citations[i];
+    			cnt[index]++;
+    		}
+    		int artNum = 0;
+    		for(int i = len; i >= 0; i--) {
+    			artNum += cnt[i];
+    			if(artNum < i) {
+    				res = artNum;
+    			} else {
+    			    res = i;
+    				break;
+    			}
+    		}
+    	}
+    	return res;
     }
 }
