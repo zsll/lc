@@ -1,6 +1,6 @@
 public class Solution {
     public int findDuplicate(int[] nums) {
-       int min = 1, max = nums.length;
+       int min = 1, max = nums.length - 1;
        while(min <= max){ // 
 int mid = min + (max - min) / 2;
 int cnt = 0;
