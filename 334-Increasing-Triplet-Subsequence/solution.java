@@ -1,23 +1,25 @@
 public class Solution {
     public boolean increasingTriplet(int[] nums) {
-                boolean res = false;
+             boolean res = false;
         if(nums != null && nums.length >= 3) {
         	int len = nums.length;
-        	int [] left = new int[len];
-        	int [] right = new int [len];
-        	left[0] = nums[0];
-        	for(int i = 1; i < len; i++) {
-        		left[i] = Math.min(left[i - 1], nums[i]);
-        	}
-        	right[len - 1] = nums[len - 1];
-        	for(int i = len - 2; i >= 0; i--) {
-        		right[i] = Math.max(right[i + 1], nums[i]);
-        	}
-        	for(int i = 1; i < len - 1; i++) {
-        		if(nums[i] > left[i] && nums[i] < right[i]) {
+        	int min = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE, 
+        			minRight = Integer.MAX_VALUE; //This means minRight is on right of min2, and even smaller than min
+        	//Note min2 is always on right of min
+        	//So it's not totally equivalent to 2nd minimum
+        	for(int i = 0; i < len; i++) {
+        		if(nums[i] > min2) {
         			res = true;
         			break;
-        		}
+        		} else if (min2 > nums[i] && nums[i] > min) {
+        			min2 = nums[i];
+        		} else if (nums[i] > minRight) {
+        			min = minRight;
+        			min2 = nums[i];
+        			minRight = Integer.MAX_VALUE;
+        		} else if (nums[i] <= min) {
+        			minRight = nums[i];
+        		} 
         	}
         }
         return res;
