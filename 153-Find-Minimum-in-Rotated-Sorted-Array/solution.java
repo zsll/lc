@@ -2,7 +2,7 @@ public class Solution {
     	public int findMin(int[] nums) {
 		int start = 0;
 				int end = nums.length-1;
-				if(nums[start] < nums[end]) {	//just to make sure it's rotated
+				if(nums[start] <= nums[end]) {	//just to make sure it's rotated
 					return nums[start];
 				}
 				while(start < end) {
@@ -30,7 +30,7 @@ public class Solution {
 						}
 					}
 				}
-				return nums[start];
+				return -1;
 	}
     
 }
