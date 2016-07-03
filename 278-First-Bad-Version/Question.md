@@ -19,12 +19,6 @@ Special thanks to [@jianchao.li.fighter](https://leetcode.com/discuss/user/jianc
 
 <div>
 
-<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
-
-<span class="hidebutton">[Facebook](/company/facebook/)</span></div>
-
-<div>
-
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Binary Search](/tag/binary-search/)</span></div>
