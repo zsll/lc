@@ -1,5 +1,5 @@
 public class Solution {
-    public String getHint(String secret, String guess) {
+	public String getHint(String secret, String guess) {
         char[] secrets = secret.toCharArray();
         char[] guesses = guess.toCharArray();
 
@@ -15,7 +15,7 @@ public class Solution {
                 if(!maps.containsKey(secrets[i]))
                     maps.put(secrets[i],0);
 
-                maps.replace(secrets[i],maps.get(secrets[i])+1);
+                maps.put(secrets[i],maps.get(secrets[i])+1);
                 postDealList.add(guesses[i]);
             }
         }
@@ -28,7 +28,7 @@ public class Solution {
                 if(val - 1 == 0)
                     maps.remove(guessChar);
                 else
-                    maps.replace(guessChar,val-1);
+                    maps.put(guessChar,val-1);
             }
         }
         return String.valueOf(As)+"A"+String.valueOf(Bs)+"B";
