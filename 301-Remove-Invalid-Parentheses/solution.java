@@ -1,46 +1,72 @@
 public class Solution {
-  private List<String> res2 = new ArrayList<String>();
-   private int max = 0;
-   public List<String> removeInvalidParentheses(String s) {
-       dfs(s, "", 0, 0);
-       if (res2.size() == 0) {
-           res2.add("");
-       }
-
-       return res2;
-   }
-
-   /**
-    * 
-    * @param str
-    * @param subRes: final result
-    * @param countLeft: remaining ( that is not matched from left
-    * @param maxLeft:  max number of ( used
-    */
-   private void dfs(String str, String subRes, int countLeft, int maxLeft) {
-       if (str.length() == 0) {
-           if (countLeft == 0 && subRes.length() != 0) {
-               if (maxLeft > max) {
-                   max = maxLeft;
-               }
-               if (max == maxLeft && !res2.contains(subRes)) {
-                   res2.add(subRes.toString());
-               }
-           }
-           return;
-       }
-
-       if (str.charAt(0) == '(') {
-           dfs(str.substring(1), subRes.concat("("), countLeft + 1, maxLeft + 1);
-           dfs(str.substring(1), subRes, countLeft, maxLeft);
-       } else if (str.charAt(0) == ')') {
-           if (countLeft > 0) {
-               dfs(str.substring(1), subRes.concat(")"), countLeft - 1, maxLeft);
-           }
-           dfs(str.substring(1), subRes, countLeft, maxLeft);
-       } else {
-           dfs(str.substring(1), subRes.concat(String.valueOf(str.charAt(0))), countLeft, maxLeft);
-       }
-   }
-   
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> res = new ArrayList<String>();
+        if(s != null ) {
+            /* NoteNote
+             * Can't have s.length != 0
+             * && s.length() > 0
+             */
+            List<StringBuffer> stringQ = new ArrayList<StringBuffer>();
+            List<Integer> usedL = new ArrayList<Integer>();
+            List<Integer> usedR = new ArrayList<Integer>();
+            stringQ.add(new StringBuffer());
+            usedL.add(0);
+            usedR.add(0);
+            for(char c : s.toCharArray()) {
+                List<StringBuffer> stringQNext = new ArrayList<StringBuffer>();
+                List<Integer> usedLNext = new ArrayList<Integer>();
+                List<Integer> usedRNext = new ArrayList<Integer>();
+                for(int i = 0; i < stringQ.size(); i++) {
+                    int usedLeft = usedL.get(i);
+                    int usedRight = usedR.get(i);
+                            StringBuffer sb = new StringBuffer(stringQ.get(i));
+                    if(c != ')' && c!= '(') {
+                        
+                            stringQNext.add(sb.append(c));
+                            usedLNext.add(usedLeft);
+                            usedRNext.add(usedRight);
+                    } else if(c == '(') {
+                            //Use Left
+                            stringQNext.add(sb.append(c));
+                            usedLNext.add(usedLeft + 1);
+                            usedRNext.add(usedRight);
+                            //Remove left
+                            sb = new StringBuffer(stringQ.get(i));
+                            stringQNext.add(sb);
+                            usedLNext.add(usedLeft);
+                            usedRNext.add(usedRight);
+                    } else {    //right
+                        if(usedRight + 1 <= usedLeft) {
+                            stringQNext.add(sb.append(c));
+                            usedLNext.add(usedLeft);
+                            usedRNext.add(usedRight + 1);
+                        }
+                        //Remove right
+                            sb = new StringBuffer(stringQ.get(i));
+                            stringQNext.add(sb);
+                            usedLNext.add(usedLeft);
+                            usedRNext.add(usedRight);
+                    }
+                }
+                
+                    stringQ = stringQNext;
+                    usedL = usedLNext;
+                    usedR = usedRNext;
+            }
+            int maxSize = 0;
+                for(int i = 0; i < stringQ.size(); i++) {
+                    if(usedL.get(i) == usedR.get(i)) {
+                        maxSize = Math.max(maxSize, stringQ.get(i).length());
+                    }
+                }
+            Set<String> visited = new HashSet<String>();
+            for(int i = 0; i < stringQ.size(); i++) {
+                    if(stringQ.get(i).length() == maxSize && !visited.contains(stringQ.get(i).toString()) && usedL.get(i) == usedR.get(i)) {
+                        visited.add(stringQ.get(i).toString());
+                        res.add(stringQ.get(i).toString());
+                    }
+                }
+        }
+        return res;
+    }
 }
