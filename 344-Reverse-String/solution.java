@@ -8,6 +8,8 @@ public class Solution {
                 char c = sb.charAt(i);
                 sb.setCharAt(i, sb.charAt(j));
                 sb.setCharAt(j, c);
+                i++;
+                j--;
             }
             res = sb.toString();
         }
