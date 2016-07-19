@@ -13,11 +13,11 @@ public class Solution {
                     if(nums[l] <= target && target < nums[mid]) {
                         r = mid - 1;
                     } else {
-                        r = mid + 1;
+                        l = mid + 1;
                     }
                 } else if (nums[mid] < nums[l] || nums[mid] < nums[r]) {  //second part is sorted
                     if(nums[mid] < target && target <= nums[r]) {
-                        r = mid + 1;
+                        l = mid + 1;
                     } else {
                         r = mid - 1;
                     }
