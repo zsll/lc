@@ -1,9 +1,20 @@
 public class Solution {
     public boolean isPerfectSquare(int num) {
-        for (int i = 1; i <= num / i; ++i) {
-            if (i * i == num) return true;
+        boolean res = false;
+        if(num >= 1) {
+            long low = 1, high = num;
+            while(low <= high) {
+                long mid = low + (high - low >> 1);
+                if(mid*mid == (long)num) {
+                    res = true;
+                    break;
+                } else if (mid*mid > num) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
         }
-        return false;
-    
+        return res;
     }
 }
