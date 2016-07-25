@@ -1,42 +1,31 @@
 public class Solution {
     public int divide(int dividend, int divisor) {
-              if(divisor == 0)
-        {
-            return Integer.MAX_VALUE;	//NoteNote
+        if (divisor == 0) {
+             return dividend >= 0? Integer.MAX_VALUE : Integer.MIN_VALUE;
         }
-        boolean isNeg = (dividend^divisor)>>>31 == 1;	//NoteNote
-        int res = 0;
-        if(dividend == Integer.MIN_VALUE)	//NoteNote special case
-        {
-            if(divisor == -1)
-            {
-                return Integer.MAX_VALUE;
+        
+        if (dividend == 0) {
+            return 0;
+        }
+        
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+        
+        boolean isNegative = (dividend < 0 && divisor > 0) || 
+                             (dividend > 0 && divisor < 0);
+                             
+        long a = Math.abs((long)dividend);
+        long b = Math.abs((long)divisor);
+        int result = 0;
+        while(a >= b){
+            int shift = 0;
+            while(a >= (b << shift)){
+                shift++;
             }
-            dividend += Math.abs(divisor);
-            res++;
+            a -= b << (shift - 1);
+            result += 1 << (shift - 1);
         }
-        if(divisor == Integer.MIN_VALUE)
-        {
-            return res;
-        }
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
-        int digit = 0;
-        while(divisor <= (dividend>>1))
-        {
-            divisor <<= 1;
-            digit++;
-        }
-        while(digit>=0)
-        {
-            if(dividend>=divisor)
-            {
-                res += 1<<digit;
-                dividend -= divisor;
-            }
-            divisor >>= 1;
-            digit--;
-        }
-        return isNeg?-res:res;
+        return isNegative? -result: result;
     }
 }
