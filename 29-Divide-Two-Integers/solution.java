@@ -15,6 +15,10 @@ public class Solution {
             dividend += Math.abs(divisor);
             res++;
         }
+        if(divisor == Integer.MIN_VALUE)
+        {
+            return res;
+        }
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
         int digit = 0;
