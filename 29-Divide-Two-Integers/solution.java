@@ -20,7 +20,7 @@ long a = Math.abs((long)dividend);	//NoteNote, convert to long
        
        //each loop adds a_0*2^0/b to res
        while(a >= b){
-           int shift = 1;
+           long shift = 1;
            while(a >= b*shift){
                shift*=10;
            }
