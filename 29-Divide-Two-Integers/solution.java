@@ -14,21 +14,19 @@ public class Solution {
        
        boolean isNegative = (dividend < 0 && divisor > 0) || 
                             (dividend > 0 && divisor < 0);
-                            
-       //long a = Math.abs((long)dividend);	//NoteNote, convert to long
-       //long b = Math.abs((long)divisor);
-       int a = Math.abs(dividend), b = Math.abs(divisor);
+long a = Math.abs((long)dividend);	//NoteNote, convert to long
+       long b = Math.abs((long)divisor);
        int result = 0;
        
        //each loop adds a_0*2^0/b to res
        while(a >= b){
-           int shift = 0;
-           while(a >= (b << shift)){
-               shift++;
+           int shift = 1;
+           while(a >= b*shift){
+               shift*=10;
            }
            //After while b << shift > a, so needs to minus 1
-           a -= b << (shift - 1);
-           result += 1 << (shift - 1);
+           a -= b *shift/10;
+           result += 1 *shift/10;
        }
        return isNegative? -result: result;
     }
