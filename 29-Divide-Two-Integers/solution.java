@@ -15,8 +15,9 @@ public class Solution {
        boolean isNegative = (dividend < 0 && divisor > 0) || 
                             (dividend > 0 && divisor < 0);
                             
-       long a = Math.abs((long)dividend);	//NoteNote, convert to long
-       long b = Math.abs((long)divisor);
+       //long a = Math.abs((long)dividend);	//NoteNote, convert to long
+       //long b = Math.abs((long)divisor);
+       int a = Math.abs(dividend), b = Math.abs(divisor);
        int result = 0;
        
        //each loop adds a_0*2^0/b to res
