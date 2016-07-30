@@ -1,19 +1,14 @@
 public class Solution {
     public int combinationSum4(int[] nums, int target) {
-        int [] res = {0};
-        combinationSum4Helper(nums, target, res);
-        return res[0];
-    }
-    
-    public void combinationSum4Helper(int [] nums, int target, int [] res) {
-        if(target == 0) {
-            res[0]++;
-        } else {
-            for(int i = 0; i < nums.length; i++) {
-                if(target >= nums[i]) {//NoteNote
-                    combinationSum4Helper(nums, target - nums[i], res);
+        int [] dp = new int[target + 1];
+        dp[0] = 1;  //NoteNote
+        for(int i = 1; i <= target; i++) {
+            for(int j = 0; j < nums.length; j++) {
+                if(i >= nums[j]) {
+                    dp[i] += dp[i - nums[j]];
                 }
             }
         }
+        return dp[target];
     }
 }
