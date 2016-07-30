@@ -10,7 +10,7 @@ public class Solution {
             res[0]++;
         } else {
             for(int i = 0; i < nums.length; i++) {
-                if(target >= nums[i]) {
+                if(target >= nums[i]) {//NoteNote
                     combinationSum4Helper(nums, target - nums[i], res);
                 }
             }
