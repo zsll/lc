@@ -1,12 +1,13 @@
 public class Solution {
     public int hIndex(int[] citations) {
-     int r = 0;
+ int r = 0;
     	//if(citations != null && citations.length > 0) {
     		int l = citations.length;
     		int start = 0, end = l - 1;
     		//To find first max article number so that article number is smaller than or equal to citation:
     		/**
-    		 *Note that when hIndexAscendingOrder, article number that is larger than i is in descending order
+    		 *Note that when hIndexAscendingOrder, article number that is larger than
+    		 *or equal to i is in descending order
     		 *The citations is ascending
 0 1 3 5 6
 While the article number is descending
@@ -35,6 +36,6 @@ We can try end equals mid minus 1
     			}
     		}
     	//}
-    	return l - start;   
+    	return l - start;
     }
 }
