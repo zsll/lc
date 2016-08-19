@@ -1,40 +1,67 @@
 public class Solution {
-    public double findMedianSortedArrays(int A[], int B[]) {
-        int len = A.length + B.length;
-        if (len % 2 == 1) {
-            return findKth(A, 0, B, 0, len / 2 + 1);
-        }
-        return (
-            findKth(A, 0, B, 0, len / 2) + findKth(A, 0, B, 0, len / 2 + 1)
-        ) / 2.0;
+    public double findMedianSortedArrays(int[] a, int[] b) {
+        int aL = a != null? a.length : 0;
+    	int bL = b != null? b.length :0;
+    	if((aL + bL)%2 > 0) {
+    		return kthSmallestSum(a, b, (aL + bL)/2 + 1);
+    	} else {
+    		int t1 = kthSmallestSum(a, b, (aL + bL)/2 );
+    		int t2 = kthSmallestSum(a, b, (aL + bL)/2 + 1);
+    		return (double)(t1 + t2)/2;//NoteNote convert
+    	}
     }
-
-    // find kth number of two sorted array
-    public  int findKth(int[] A, int A_start,
-                              int[] B, int B_start,
-                              int k){		
-		if (A_start >= A.length) {
-			return B[B_start + k - 1];
-		}
-		if (B_start >= B.length) {
-			return A[A_start + k - 1];
-		}
-
-		if (k == 1) {
-			return Math.min(A[A_start], B[B_start]);
-		}
-		
-		int A_key = A_start + k / 2 - 1 < A.length
-		            ? A[A_start + k / 2 - 1]
-		            : Integer.MAX_VALUE;
-		int B_key = B_start + k / 2 - 1 < B.length
-		            ? B[B_start + k / 2 - 1]
-		            : Integer.MAX_VALUE; 
-		
-		if (A_key < B_key) {
-			return findKth(A, A_start + k / 2, B, B_start, k - k / 2);
-		} else {
-			return findKth(A, A_start, B, B_start + k / 2, k - k / 2);
-		}
-	}
+    
+    
+    public int kthSmallestSum(int[] A, int[] B, int k) {
+        // Write your code here
+    	int result = 0;
+    	if(A != null && B != null && A.length + B.length >= 0 && k <= A.length + B.length) {
+    		result = kthSmallestSumHelper(A, B, k, 0, A.length - 1, 0, B.length - 1);
+    	}
+    	return result;
+    }
+    
+    public int kthSmallestSumHelper(int[] a, int[] b, int k, int aStart, int aEnd, int bStart, int bEnd) {
+        // Write your code here
+    	if(aStart > aEnd) {
+    		return b[bStart + k - 1];
+    	}
+    	if(bStart > bEnd) {
+    		return a[aStart + k - 1];
+    	}
+    	int aMid = (aEnd - aStart)/2 + aStart;
+    	int bMid = (bEnd - bStart)/2 + bStart;
+    	
+    	int firstHalfLen = (aMid - aStart + 1) + (bMid - bStart + 1);
+    	
+    	if(k == 1) {
+    	    return Math.min(a[aStart], b[bStart]);
+    	}
+    	
+    	if (k == firstHalfLen) {
+    		if(a[aMid] == b[bMid]) {
+    			return a[aMid];
+    		} else if(a[aMid] > b[bMid]) {
+    			return kthSmallestSumHelper(a, b, k - (bMid - bStart + 1 ), aStart, aMid, bMid + 1, bEnd);
+    		} else {
+    			return kthSmallestSumHelper(a, b, k - (aMid - aStart + 1 ), aMid + 1, aEnd, bStart, bMid);
+    		}
+    	} else if(k < firstHalfLen) {
+    		if(a[aMid] == b[bMid]) {
+    			return kthSmallestSumHelper(a, b, k, aStart, aMid - 1, bStart, bMid - 1);
+    		} else if(a[aMid] > b[bMid]) {
+    			return kthSmallestSumHelper(a, b, k, aStart, aMid - 1, bStart, bEnd);
+    		} else {
+    			return kthSmallestSumHelper(a, b, k, aStart, aEnd, bStart, bMid - 1);
+    		}	
+    	} else {
+    		if(a[aMid] == b[bMid]) {
+    			return kthSmallestSumHelper(a, b, k - firstHalfLen, aMid + 1, aEnd, bMid + 1, bEnd);
+    		} else if(a[aMid] > b[bMid]) {
+    			return kthSmallestSumHelper(a, b, k - (bMid - bStart + 1), aStart, aEnd, bMid + 1, bEnd);
+    		} else {
+    			return kthSmallestSumHelper(a, b, k - (aMid - aStart + 1), aMid + 1, aEnd, bStart, bEnd);
+    		}
+    	}
+    }
 }
