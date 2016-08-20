@@ -5,67 +5,39 @@ public class Solution {
     		res = true;
     	} else {
     		int sLen = s.length(), pLen = p.length();
-    		boolean [][] dp = new boolean[sLen + 1][pLen + 1];
+    		boolean [][] dp = new boolean[sLen + 1][2];
     		dp[0][0] = true;
-    		for(int i = 1; i <= pLen; i++) {
-    			char pChar = p.charAt(i - 1);
-    			if(pChar == '*') {
-    				dp[0][i] = true; 
-    			} else {
-    				break;
-    			}
-    		}
-
-    		
-    		/*
-    		for(int i = 1; i <= sLen; i++) {
-    			for(int j = 1; j <= pLen; j++) {
-    				char pChar = p.charAt(j - 1);
-    				char sChar = s.charAt(i - 1);
-    				dp[i][j] = false;
-    				if(sChar == pChar || pChar == '?') {
-    					dp[i][j] = dp[i - 1][j - 1];
-    				} else if (pChar == '*') {
-    					for(int k = 1; k <= i; k++) {
-    						if(dp[k][j - 1]) {
-    							dp[i][j] = true;
-    							break;
-    						} 
-    					}
-    				}
-    			}
-    		}
-    		 * |
-    		 * V
-    		 * 
-    		 * Better
-    		 */
     		for(int j = 1; j <= pLen; j++) {
     			char pChar = p.charAt(j - 1);
     			if(pChar != '*') {
-    				for(int i = 1; i <= sLen; i++) {
-    					dp[i][j] = false;
-    					char sChar = s.charAt(i - 1);
-    					if(sChar == pChar || pChar == '?') {
-        					dp[i][j] = dp[(i - 1)][j - 1];
-        				}
+    				for(int i = 0; i <= sLen; i++) {
+    					if(i == 0) {
+    						dp[i][j%2] = false;
+    						continue;
+    					} else {
+	    					dp[i][j%2] = false;
+	    					char sChar = s.charAt(i - 1);
+	    					if(sChar == pChar || pChar == '?') {
+	        					dp[i][j%2] = dp[(i - 1)][(j - 1)%2];
+	        				}
+    					}
     				}
     			} else {
     				int k = 0;
     				for( k = 0; k <= sLen; k++) {
-    					if(dp[k][j - 1]) {
+    					if(dp[k][(j - 1)%2]) {
     						break;
     					} else {
-    						dp[k][j] = false;
+    						dp[k][j%2] = false;
     					}
     				}
     				while(k <= sLen) {
-    					dp[k][j] = true;
+    					dp[k][j%2] = true;
     					k++;
     				}
     			}
     		}
-    		res = dp[sLen][pLen];
+    		res = dp[sLen][pLen%2];
     	}
     	return res;
     }
