@@ -5,7 +5,7 @@ public class Solution {
     		res = true;
     	} else {
     		int sLen = s.length(), pLen = p.length();
-    		boolean [][] dp = new boolean[2][pLen + 1];
+    		boolean [][] dp = new boolean[sLen + 1][pLen + 1];
     		dp[0][0] = true;
     		for(int i = 1; i <= pLen; i++) {
     			char pChar = p.charAt(i - 1);
@@ -44,27 +44,28 @@ public class Solution {
     			char pChar = p.charAt(j - 1);
     			if(pChar != '*') {
     				for(int i = 1; i <= sLen; i++) {
-    					dp[i%2][j] = false;
+    					dp[i][j] = false;
     					char sChar = s.charAt(i - 1);
     					if(sChar == pChar || pChar == '?') {
-        					dp[i%2][j] = dp[(i - 1)%2][j - 1];
+        					dp[i][j] = dp[(i - 1)][j - 1];
         				}
     				}
     			} else {
-    				int k = 1;
-    				for( k = 1; k <= sLen; k++) {
-    					if(dp[k%2][j - 1]) {
+    				int k = 0;
+    				for( k = 0; k <= sLen; k++) {
+    					if(dp[k][j - 1]) {
     						break;
     					} else {
-    						dp[k%2][j] = false;
+    						dp[k][j] = false;
     					}
     				}
     				while(k <= sLen) {
-    					dp[k%2][j] = true;
+    					dp[k][j] = true;
+    					k++;
     				}
     			}
     		}
-    		res = dp[sLen%2][pLen];
+    		res = dp[sLen][pLen];
     	}
     	return res;
     }
