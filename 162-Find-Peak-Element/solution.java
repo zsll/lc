@@ -1,35 +1,40 @@
 public class Solution {
-
-    private int[] arr;
-	public int findPeakElement(int[] num) {
-		arr = num;
-		return findPeak(0, num.length - 1);
+    public int findPeakElement(int[] nums) {
+        int res = -1;
+        if(nums != null && nums.length > 0) {
+            res = 0;
+            int start = 0, end = nums.length - 1;
+            while(start <= end) {
+                int mid = start + end >> 1;
+                int trend = isPeak(nums, mid);
+                if(trend == 0) {
+                    res = mid;
+                    break;
+                } else if (trend == 1) {
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+            }
+        }
+        return res;
     }
-	private int findPeak(int from, int to) {
-        int mid = from + to >> 1; //NoteNote: moves right equals divided by 2
-		if (isPeak(mid) == 0) return mid;
-        if (isPeak(mid) == -1) return findPeak (from, mid - 1);
-        else return findPeak(mid + 1, to);
-	}
-	
-	//return 0 mean peak, 1 means up or even, -1 means down or even
-    private int isPeak(int i) {
-    	if(!biggerThanNext(i)) {
-    		return 1;
-    	} else if (!biggerThanPre(i)) {
-    		return -1;
-    	} else {
-    		return 0;
-    	}
-    	
+    
+    int isPeak(int [] a, int i) {
+        if(biggerThanNext(a, i) && biggerThanPre(a, i)) {
+            return 0;
+        } else if(biggerThanPre(a, i)) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
-  
-    //last or bigger than next
-    private boolean biggerThanNext(int i) {
-    	return i == arr.length - 1 || arr[i] > arr[i + 1];	//NoteNote: this problem no adjacent elements are equal, edge are considered as minimum value
+    
+    boolean biggerThanNext(int [] a, int i) {
+    	return i == a.length - 1 || a[i] > a[i + 1];
     }
-    //first or bigger than previous
-    private boolean biggerThanPre(int i) {
-        return i == 0 || arr[i] > arr[i - 1];
+    
+    boolean biggerThanPre(int [] a, int i) {
+    	return i == 0 || a[i] > a[i - 1];
     }
 }
