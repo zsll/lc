@@ -1,6 +1,7 @@
 public class Solution {
     public int minPatches(int[] nums, int n) {
-        int target = 1, i = 0, res = 0;
+        long target = 1;
+        int i = 0, res = 0;
         while (target <= n) {
             if(i < nums.length && target >= nums[i]) {
                 target += nums[i++];
