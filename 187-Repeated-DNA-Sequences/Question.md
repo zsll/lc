@@ -22,12 +22,6 @@ Return:
 
 <div>
 
-<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
-
-<span class="hidebutton">[LinkedIn](/company/linkedin/)</span></div>
-
-<div>
-
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Hash Table](/tag/hash-table/) [Bit Manipulation](/tag/bit-manipulation/)</span></div>
