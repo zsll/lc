@@ -1,25 +1,20 @@
 public class Solution {
     public boolean isValidSerialization(String preorder) {
-        boolean res = true;
-        if(preorder != null && preorder.length() > 0) {
-            int index = preorder.indexOf(",#,#");
-            while(index >= 1) {
-                String end = (index + 4 < preorder.length()) ? preorder.substring(index + 4) : "";
-                int pre = index - 1;
-                while(pre >= 0 &&  preorder.charAt(pre) >= '0' && preorder.charAt(pre) <= '9') {
-                    pre--;
-                }
-                if(index == pre + 1) {
-                    res = false;
-                    break;
-                }
-                preorder = preorder.substring(0, pre + 1)  + "#" + end;
-                index = preorder.indexOf(",#,#");
-            }
-            if(!preorder.equals("#")) {
-                res = false;
+        String [] a = preorder.split(",");
+        LinkedList<String> l = new LinkedList<String>();
+        for(String c : a) {
+            l.add(c);
+            int s = l.size();
+            while(s >= 3 && l.get(s - 1).equals("#") && l.get(s - 2).equals("#")
+                && !l.get(s - 3).equals("#")) {
+                l.removeLast();
+                l.removeLast();
+                l.removeLast();
+                
+                l.add("#");
+                s = l.size();   //NoteNote
             } 
         }
-        return res;
+        return l.size() <= 1 && l.get(0).equals("#");
     }
 }
