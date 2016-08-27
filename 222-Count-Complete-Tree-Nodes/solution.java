@@ -13,7 +13,7 @@ public class Solution {
         if(root != null) {
             int lHeight = leftHeight(root.left), rHeight = rightHeight(root.right);
             if(lHeight == rHeight) {
-                res = (int)Math.pow(2, lHeight + 1) - 1;
+                res = (1<<(lHeight + 1)) - 1;
             } else {
                 res = countNodes(root.left) + countNodes(root.right) + 1;
             }
