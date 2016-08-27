@@ -1,39 +1,34 @@
 public class Solution {
     public String shortestPalindrome(String s) {
-        String res = s;
-        if(s != null && s.length() > 0) {
-            int len = s.length();
-            int i = (len - 1)/2, j = (len )/2;  //NoteNote
-            boolean moveI = i == j;
-            while(i >= 0) {
-                if(isParlindrome(s, i, j)) {
-                    break;
-                }
-                if(moveI) {
-                    i --;
-                    moveI = false;
-                } else {
-                    j--;
-                    moveI = true;
+        StringBuffer sb = new StringBuffer(s);
+        if(s.length() > 0) {
+            int len = s.length(), maxPLenFrom0 = 1;
+            boolean [][] dp = new boolean[len][len];    //from i to j is palindrome
+            for(int i = 0; i < len; i++) {
+                dp[i][i] = true;
+                if(i < len - 1 && s.charAt(i) == s.charAt(i + 1)) {
+                    dp[i][i + 1] = true;
+                    if(i == 0) {
+                        maxPLenFrom0 = 2;
+                    }
                 }
             }
-            StringBuffer sb = new StringBuffer();
-            while(i > 0) {
-                i--;j++;
+            for(int ij = 3; ij <= len; ij++) {  //ij is length from i to j
+                for(int col = ij - 1; col < len; col++) {
+                    int row = col - ij + 1;
+                    if(s.charAt(row) == s.charAt(col) && dp[row + 1][col - 1]) {
+                        dp[row][col] = true;
+                        if(row == 0) {
+                            maxPLenFrom0 = ij;
+                        }
+                    }
+                }
             }
-            for(int k = len - 1; k > j; k--) {
-                sb.append(s.charAt(k));
+            for(int i = 0; i < len - maxPLenFrom0; i++) {
+                char c = s.charAt(len - i - 1);
+                sb.insert(i, c);
             }
-            return sb.append(s).toString();
         }
-        return res;
-    }
-    
-    boolean isParlindrome(String s, int i, int j) { //expanding from i and j, if i can reach 0 
-        boolean res = true;
-        while(i >= 0 && s.charAt(i) == s.charAt(j)) {
-            i--; j++;
-        }
-        return i < 0;
+        return sb.toString();
     }
 }
