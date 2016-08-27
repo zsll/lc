@@ -7,8 +7,8 @@ public class Solution {
             if(s.length() != t.length()) {
                 res = false;
             } else {
-                int [] st = new int[256];    //if not set, will be 0
-                int [] ts = new int[256];
+                int [] st = new int[257];    //if not set, will be 0
+                int [] ts = new int[257];
                 for(int i = 0; i < s.length(); i++) {
                     int sc = (int)(s.charAt(i)  + 1);  //1 to 256
                     int tc = (int)(t.charAt(i)  + 1);
