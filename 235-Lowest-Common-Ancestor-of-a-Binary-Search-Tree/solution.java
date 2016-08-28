@@ -9,18 +9,21 @@
  */
 public class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        TreeNode result = null;
-        if(root != null) {
-            if(p.val > q.val) {
-                result = lowestCommonAncestor(root, q, p);
-            } else if (p.val <= root.val && root.val <= q.val) {
-                result = root;
-            } else if (root.val > q.val) {
-                result = lowestCommonAncestor(root.left, p, q);
+        if(p.val > q.val) {
+            return lowestCommonAncestor(root, q, p);
+        }
+        TreeNode res = null;
+        while(root != null) {
+            int v = root.val, large = q.val, small = p.val;
+            if(v <= large && v >= small) {
+                res = root;
+                break;
+            } else if(v > large) {
+                root = root.left;
             } else {
-                result = lowestCommonAncestor(root.right, p, q);
+                root = root.right;
             }
         }
-        return result;
+        return res;
     }
 }
