@@ -35,4 +35,4 @@ Special thanks to [@jianchao.li.fighter](https://leetcode.com/discuss/user/jianc
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(H) First Missing Positive](/problems/first-missing-positive/) [(M) Single Number](/problems/single-number/) [(H) Find the Duplicate Number](/problems/find-the-duplicate-number/)</span></div>
+<span class="hidebutton">[(H) First Missing Positive](/problems/first-missing-positive/) [(E) Single Number](/problems/single-number/) [(H) Find the Duplicate Number](/problems/find-the-duplicate-number/)</span></div>
