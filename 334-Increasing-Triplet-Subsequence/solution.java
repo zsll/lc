@@ -2,40 +2,19 @@ public class Solution {
     public boolean increasingTriplet(int[] nums) {
         boolean res = false;
         if(nums != null && nums.length >= 3) {
-            int len = nums.length;
-            Integer min = null, min2 = null, minRight = null;
+            int min = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE, minRight = Integer.MAX_VALUE;
             for(int i : nums) {
-                if(min == null) {
-                    min = i;
+                if(i > min2) {
+                    res = true;
+                    break;
+                } else if (i > min) {
+                    min2 = i;
+                } else if (i > minRight) {
+                    min = minRight;
+                    min2 = i;
+                    minRight = Integer.MAX_VALUE;
                 } else {
-                    if(min2 == null) {
-                        if(i > min) {
-                            min2 = i;
-                        } else {
-                            min = i;
-                        }
-                    } else {
-                        if(i > min2) {
-                            res = true;
-                            break;
-                        } else {
-                            if(minRight != null) {
-                                if(i > minRight) {
-                                    min = minRight;
-                                    min2 = i;
-                                    minRight = null;
-                                } else {
-                                    minRight = i;
-                                }
-                            } else {
-                                if(i > min) {
-                                    min2 = i;
-                                } else {
-                                    minRight = i;
-                                }
-                            }
-                        }
-                    }
+                    minRight = i;   //first step
                 }
             }
         }
