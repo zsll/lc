@@ -15,9 +15,3 @@ Return true because `"leetcode"` can be segmented as `"leet code"`.
 [Subscribe](/subscribe/) to see which companies asked this question
 
 </div>
-
-<div>
-
-<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
-
-<span class="hidebutton">[Amazon](/company/amazon/) [Bloomberg](/company/bloomberg/) [Facebook](/company/facebook/) [Google](/company/google/) [Pocket Gems](/company/pocket-gems/) [Uber](/company/uber/) [Yahoo](/company/yahoo/)</span></div>
