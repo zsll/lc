@@ -16,8 +16,10 @@ public class Solution {
                     }
                 }
             }
-            StringBuffer sb = new StringBuffer();
-            dfs(t, sb, res, s, 0);
+            if(dp[len]) {
+                StringBuffer sb = new StringBuffer();
+                dfs(t, sb, res, s, 0);
+            }
         }
         return res;
     }
