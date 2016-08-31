@@ -1,25 +1,24 @@
 public class Solution {
-    LinkedList<String> result;
-    Map<String, PriorityQueue<String>> mp;
-    
     public List<String> findItinerary(String[][] tickets) {
-        if (tickets==null || tickets.length==0) return new LinkedList<String>();
-        result = new LinkedList<String>();
-        mp = new HashMap<String, PriorityQueue<String>>();
-        for (String[] ticket : tickets) {
-            if (!mp.containsKey(ticket[0])) {
-                mp.put(ticket[0], new PriorityQueue<String>());
-            }
-            mp.get(ticket[0]).offer(ticket[1]);
-        }
-        dfs("JFK");
-        return result;
+         LinkedList<String> res = new LinkedList<String>();
+         if(tickets != null && tickets.length > 0 && tickets[0].length == 2) {
+             HashMap<String, PriorityQueue<String>> m = new HashMap<String, PriorityQueue<String>>();
+             for(int i = 0; i < tickets.length; i++) {
+                 if(!m.containsKey(tickets[i][0])) {
+                     m.put(tickets[i][0], new PriorityQueue<String>());
+                 }
+                 m.get(tickets[i][0]).offer(tickets[i][1]);
+             }
+             
+             dfs("JFK", m, res);
+         }
+         return res;
     }
     
-    public void dfs(String cur) {
-        while (mp.containsKey(cur) && !mp.get(cur).isEmpty()) {
-            dfs(mp.get(cur).poll());
+    void dfs(String cur, HashMap<String, PriorityQueue<String>> m, LinkedList<String> res) {
+        while(m.containsKey(cur) && !m.get(cur).isEmpty()) {
+            dfs(m.get(cur).poll(), m, res);
         }
-        result.addFirst(cur);
+        res.addFirst(cur);
     }
 }
