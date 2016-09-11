@@ -5,22 +5,21 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        int res = 0;
-        if(n > 0) {
-            int low = 1, high = n;
-            while(low <= high) {
-                int mid = low + (high - low >> 1);
-                int g = guess(mid);
-                if(g == 0){
-                    res = mid;
-                    break;
-                } else if(g == -1) {
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-            }
+        int low = 1;
+        int high = n;
+       
+        while (low <= high) {
+            int mid = low+(high-low)/2;
+            int guessResult = guess(mid);
+            if (guessResult == 0)
+                return mid;
+
+            if (guessResult == 1)
+                low = mid+1;
+            else if (guessResult == -1) 
+                high = mid-1;
         }
-        return res;
+        
+        return -1;
     }
 }
