@@ -4,10 +4,10 @@ public class Solution {
         char [] c = s.toCharArray();
         int i = 0, j = s.length() - 1;
         while(i < j) {
-            while(!set.contains(i)) {
+            while(!set.contains(i) && i < j) {
                 i++;
             }
-            while(!set.contains(j)) {
+            while(!set.contains(j) && i < j) {
                 j--;
             }
             if(i < j) {
