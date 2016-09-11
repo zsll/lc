@@ -1,32 +1,33 @@
 public class Solution {
-int[] original;
-    int[] shuffled;  
-    Random r;
- 
+
+    int[] nums;
+    int[] shuffled;
     public Solution(int[] nums) {
-        original = nums;
-        shuffled = Arrays.copyOf(nums,nums.length);
-        r = new Random();
+        this.nums = nums;
+        shuffled=Arrays.copyOf(nums, nums.length);
     }
- 
+    
     /** Resets the array to its original configuration and return it. */
     public int[] reset() {
-        shuffled=Arrays.copyOf(original, original.length);
-        return shuffled;
+        return nums;
     }
- 
+    
     /** Returns a random shuffling of the array. */
     public int[] shuffle() {
-        int len = shuffled.length;
- 
-        for(int i=0; i<len; i++){
-            int si = r.nextInt(len-i);
-            int temp = shuffled[i];
-            shuffled[i]=shuffled[si+i];
-            shuffled[si+i]=temp;
+        int i = 0;
+        Random r = new Random();
+        while(i < nums.length - 1) {
+            int j = r.nextInt(nums.length - i);
+            swap(shuffled, i, i + j);
+            i++;
         }
- 
         return shuffled;
+    }
+    
+    void swap(int [] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 }
 
