@@ -14,13 +14,13 @@ public class Solution {
     
     /** Returns a random shuffling of the array. */
     public int[] shuffle() {
-        int i = 0;
-        Random r = new Random();
-        while(i < nums.length - 1) {
-            int j = r.nextInt(nums.length - i);
-            swap(shuffled, i, i + j);
-            i++;
-        }
+        int i = nums.length - 1;
+        		Random r = new Random();
+        		while(i > 0) {
+            		int j = r.nextInt(i + 1);
+            		swap(shuffled, i, j);
+            		i--;
+        		}
         return shuffled;
     }
     
