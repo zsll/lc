@@ -68,6 +68,7 @@ Expected:
                          String top = stack.pop();
                          cur = top + sb.toString();
                      } else {
+                         /*2[2[b]]*/
                          cur = sb.toString();
                      }
                  }
