@@ -2,7 +2,7 @@ public class Solution {
     public List<Integer> lexicalOrder(int n) {
         List<Integer> list = new ArrayList<>(n);
         int curr = 1;
-        for (int i = 1; i <= n; i++) {
+        while (list.size() < n) {
             list.add(curr);
             if (curr * 10 <= n) {
                 curr *= 10;//cur is 45, next 450
