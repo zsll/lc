@@ -8,7 +8,8 @@ public class Solution {
                 int startingOnes = getStarting1Num(data[i]);
                 if(startingOnes == 1) {
                     /*single number 10010001*/
-                    return false;
+                    res = false;
+                    break;
                 }
                 while(j < data.length && j - i < startingOnes && startWith10(data[j])) {
                     j++;
