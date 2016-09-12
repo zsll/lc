@@ -4,12 +4,16 @@ public class Solution {
         int i = 0;
         while (i < data.length) {
             if(!startWith0(data[i])) {
-                int j = 0;
+                int j = i + 1;
                 int startingOnes = getStarting1Num(data[i]);
-                while(j + i + 1 < data.length && j < startingOnes && startWith10(data[j + i + 1])) {
+                if(startingOnes == 1) {
+                    /*single number 10010001*/
+                    return false;
+                }
+                while(j < data.length && j - i < startingOnes && startWith10(data[j])) {
                     j++;
                 }
-                if(j < startingOnes - 1) {
+                if(j - i < startingOnes) {
                     res = false;
                     break;
                 } else {
