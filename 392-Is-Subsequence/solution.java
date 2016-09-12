@@ -20,17 +20,20 @@ public class Solution {
 			}
 		}
 		int[] pos = new int[sLen];	//pos[i] has the last appearance of s.charAt(i) in t
+		int [] firstCopy = new int[26];
+		System.arraycopy(first, 0, firstCopy, 0, 26);
+		
 		for (int i = 0; i < sLen; i++) {
-			int curr = s.charAt(i)-'a';
-			int currPos = first[curr];//first appearance in t
+			int charInS = s.charAt(i)-'a';
+			int posInT = firstCopy[charInS];//first appearance in t
 			if(i > 0) {	//Else don't have to consider have to be larger than previous position
-				while (currPos != -1 && currPos <= pos[i-1]) {	//first appearance of last character
-					currPos = record[currPos];
+				while (posInT != -1 && posInT <= pos[i-1]) {	//first appearance of last character
+					posInT = record[posInT];
 				}
 			}
-			if (currPos == -1) return false;
-			first[curr] = record[currPos];//go to next pos in t
-			pos[i] = currPos;
+			if (posInT == -1) return false;
+			firstCopy[charInS] = record[posInT];//go to next pos in t
+			pos[i] = posInT;
 		}
 		return true;
     }
