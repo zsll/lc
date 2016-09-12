@@ -29,9 +29,7 @@ public class Solution {
                          stack.push(cur);
                          cur = null;
                      }
-                 } else {
-                     num = null;
-                 }
+                 } 
                  
                  if (c >= 'a' && c <= 'z') {
                      if(stack.empty()) {
