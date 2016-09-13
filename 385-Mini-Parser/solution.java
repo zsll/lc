@@ -31,7 +31,7 @@ public class Solution {
         NestedInteger res = null;
         if(s != null && s.length() > 0) {
             Stack<NestedInteger> stack = new Stack<NestedInteger>();
-            //Create new NestedInteger when 1. start of number, hitting a [
+            //Create new NestedInteger when 1. start of number, hitting a '['
             boolean prevCharIsNumber = false;
             boolean isNeg = false;
             for(char c : s.toCharArray()) {
