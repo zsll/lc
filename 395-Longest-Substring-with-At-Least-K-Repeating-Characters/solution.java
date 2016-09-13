@@ -3,40 +3,37 @@ public class Solution {
     Two pointers solution
     */
     public int longestSubstring(String s, int k) {
-       char[] str = s.toCharArray();
-        int[] counts = new int[26];
-        int h, i, j, idx, max = 0, unique, noLessThanK;
-        
-        for (h = 1; h <= 26; h++) {
-            Arrays.fill(counts, 0);
-            i = 0; 
-            j = 0;
-            unique = 0;
-            noLessThanK = 0;
-            while (j < str.length) {
-                if (unique <= h) {
-                    idx = str[j] - 'a';
-                    if (counts[idx] == 0)
-                        unique++;
-                    counts[idx]++;
-                    if (counts[idx] == k)
-                        noLessThanK++;
-                    j++;
-                }
-                else {
-                    idx = str[i] - 'a';
-                    if (counts[idx] == k)
-                        noLessThanK--;
-                    counts[idx]--;
-                    if (counts[idx] == 0)
-                        unique--;
-                    i++;
-                }
-                if (unique == h && unique == noLessThanK)
-                    max = Math.max(j - i, max);
+       //System.out.println(s);
+        int n = s.length();
+        if(n < k) return 0;
+        int counter[] = new int[26];
+        boolean valid[] = new boolean[26];
+        char ss[] = s.toCharArray();
+        //统计每个字符的长度
+        for(int i=0;i<n;i++) 
+            counter[ss[i] - 'a']++;
+        //检查当前字符串是否是完全满足的
+        boolean fullValid = true;
+        //判断每个字符的出现条件是否合适，即，要么不出现，要么出现了不少于k
+        for(int i=0;i<26;i++){
+            if(counter[i]>0 && counter[i]<k){
+                valid[i] = false;
+                fullValid = false;
+            }
+            else valid[i] = true;
+        }
+        if(fullValid) return s.length();
+        int max = 0;
+        int lastStart=0;
+        //把不符合要求的断开，然后依次检查 取最大
+        for(int i=0;i<n;i++){
+            if(valid[ss[i] - 'a'] == false){
+               // System.out.println(lastStart+"  "+i);
+                max = Math.max(max,longestSubstring(s.substring(lastStart,i),k));
+                lastStart = i + 1;
             }
         }
-        
+        max = Math.max(max,longestSubstring(s.substring(lastStart,n),k));
         return max;
     }
 }
