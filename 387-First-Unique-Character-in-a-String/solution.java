@@ -15,6 +15,7 @@ public class Solution {
             for(int i = 0; i < len; i++) {
                 if(map.get(s.charAt(i)) == 1 && i < res) {
                     res = i;
+                    break;
                 }
             }
             
