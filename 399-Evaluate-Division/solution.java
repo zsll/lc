@@ -1,5 +1,5 @@
 public class Solution {
-    public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
+     public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
     	double[] res = new double[queries.length];
     	HashMap<String [], Double> valueMap = new HashMap<String [], Double>();
         HashMap<String, List<String []>> startToResult = new HashMap<String, List<String []>>();
@@ -28,16 +28,14 @@ public class Solution {
     
     double dfs(HashMap<String [], Double> valueMap, HashMap<String, List<String []>> startToResult, String start, String end, HashSet<String> visited) {
     	double res = -1.0;
-    	if(!visited.contains(start)) {
+    	if(!visited.contains(start) && startToResult.containsKey(start)) {
 	    	visited.add(start);
-	    	if(start.equals(end) && startToResult.containsKey(start)) {
+	    	if(start.equals(end)) {//[x,x]
 	    		res = 1.0;
-	    	} else if (startToResult.containsKey(start)){
+	    	} else {//without this, next get will have null pointer exception
 	    		List<String []> endEq = startToResult.get(start);
 	    		for(String [] nextEq : endEq) {
-	
 	    			double nextRes = dfs(valueMap, startToResult, nextEq[1], end, visited);
-	
 	    			if(nextRes != -1.0) {
 	    				res = valueMap.get(nextEq) * nextRes;
 	    				break;
