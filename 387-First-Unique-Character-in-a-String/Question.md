@@ -20,3 +20,9 @@ return 2.
 [Subscribe](/subscribe/) to see which companies asked this question
 
 </div>
+
+<div>
+
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
+
+<span class="hidebutton">[Amazon](/company/amazon/)</span></div>
