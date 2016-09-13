@@ -38,7 +38,7 @@ public class Solution {
     int getStarting1Num(int a) {
         int t = (1 << 7);
         int res = 0;
-        while((t&a) > 0) {
+        while((t&a) > 0) {//NoteNote the & sign has lower priority than >
             t = t >> 1;
             res++;
         }
