@@ -1,5 +1,5 @@
 public class Solution {
-    public String decodeString(String s) {
+     public String decodeString(String s) {
         /**
          * res string buffer
          * when hitting a number, calculate cur number, if current string is not null, add it into stack
@@ -22,12 +22,12 @@ public class Solution {
                  if(c >= '0' && c <= '9') {
                      if(num == null) {
                          num = Long.parseLong(c + "");
+                         if(cur != null) {
+                             stack.push(cur);
+                             cur = null;
+                         }
                      } else {
                          num = num*10 + Long.parseLong(c + "");
-                     }
-                     if(cur != null) {
-                         stack.push(cur);
-                         cur = null;
                      }
                  } 
                  
@@ -65,8 +65,7 @@ Expected:
                      } else if (stack.peek().charAt(0) >= 'a' && stack.peek().charAt(0) <= 'z') {
                          String top = stack.pop();
                          cur = top + sb.toString();
-                     } else {
-                         /*2[2[b]]*/
+                     } else {/*2[2[b]]*/
                          cur = sb.toString();
                      }
                  }
