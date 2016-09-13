@@ -1,21 +1,26 @@
 public class Solution {
     int []nums;
-    public Solution(int[] nums) {
-        this.nums = nums;
-    }
-    
-   
+        public Solution(int[] nums) {
+            this.nums = nums;
+        }
+        
+       
 
-    Random r = new Random();
-	public int pick(int target) {
-		ArrayList<Integer> idxs = new ArrayList<Integer>();
-		for(int i=0;i<nums.length;i++){
-		    if(target==nums[i]){
-		        idxs.add(i);
-		    }
-		}
-		return idxs.get(r.nextInt(idxs.size()));
-	}
+    	public int pick(int target) {
+    		int res = -1;
+            Random r = new Random();
+            int found = 0;
+    		for(int i=0;i<nums.length;i++){
+    		    
+    		    if(target==nums[i]) {
+    		        found++;
+    		        if(r.nextInt(found) == 0) {
+    		            res = i;
+    		        }
+    		    }
+    		}
+    		return res;
+    	}
 
 }
 
