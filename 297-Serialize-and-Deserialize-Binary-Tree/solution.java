@@ -8,57 +8,62 @@
  * }
  */
 public class Codec {
-
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        StringBuilder sb = new StringBuilder();
-        
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.offer(root);
-        
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            if (node == null) {
-                sb.append("null,");
+public String serialize(TreeNode root) {
+        // write your code here
+        StringBuffer sb = new StringBuffer();
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(root);
+        while(q.size() > 0) {
+            TreeNode c = q.poll();
+            if(sb.length() > 0) {
+                sb.append(',');
+            }
+            if(c == null) {
+                sb.append('#');
             } else {
-                sb.append(String.valueOf(node.val) + ",");
-                queue.offer(node.left);
-                queue.offer(node.right);
+                sb.append(c.val);
+                q.offer(c.left);
+                q.offer(c.right);
             }
         }
-        
         return sb.toString();
     }
-
-    // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data.isEmpty()) return null;
-        
-        String[] vals = data.split(",");
-        int[] nums = new int[vals.length]; // 节点i之前null节点的个数
-        TreeNode[] nodes = new TreeNode[vals.length];
-        
-        for (int i = 0; i < vals.length; i++) {
-            if (i > 0) {
-                nums[i] = nums[i - 1];
-            }
-            if (vals[i].equals("null")) {
-                nodes[i] = null;
-                nums[i]++;
+        if(data == null || data.length() == 0) {
+            return null;    //NoteNote
+        }
+        // write your code here
+        String [] sA = data.split(","); //NoteNote, use "", not ''
+        int l = sA.length;
+        TreeNode [] tA = new TreeNode[l];
+        for(int i = 0; i < l; i++) {
+            String s = sA[i];
+            if(s.equals("#")) {
+                tA[i] = null;
             } else {
-                nodes[i] = new TreeNode(Integer.parseInt(vals[i]));
+                tA[i] = new TreeNode(Integer.parseInt(s));
             }
         }
-        
-        for (int i = 0; i < vals.length; i++) {
-            if (nodes[i] == null) {
+        int preNullNum = 0;
+        for(int i = 0; i < l; i++) {
+            if( tA[i] == null) {
+                preNullNum++;
                 continue;
             }
-            nodes[i].left = nodes[2 * (i - nums[i]) + 1];
-            nodes[i].right = nodes[2 * (i - nums[i]) + 2];
+            boolean isLeft = true;
+            int leftChildIndex = i*2 + 1 - preNullNum * 2;//NoteNote: have to make a second scan to find children
+            int rightChildIndex = i*2 + 2 - preNullNum * 2;
+            if(leftChildIndex >= l) {
+                break;
+            }
+            tA[i].left = tA[leftChildIndex];
+            if(rightChildIndex >= l) {
+                break;
+            }
+            
+            tA[i].right = tA[rightChildIndex];
         }
-        
-        return nodes[0];
+        return tA[0];
     }
 }
 
