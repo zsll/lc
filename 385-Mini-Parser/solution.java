@@ -28,30 +28,33 @@
  */
 public class Solution {
     public NestedInteger deserialize(String s) {
-        NestedInteger res = null;
+         NestedInteger res = null;
         if(s != null && s.length() > 0) {
             Stack<NestedInteger> stack = new Stack<NestedInteger>();
             //Create new NestedInteger when 1. start of number, hitting a '['
             boolean prevCharIsNumber = false;
             boolean isNeg = false;
+            NestedInteger cur = null;
             for(char c : s.toCharArray()) {
                 if (c >= '0' && c <= '9' || c == '-'){
                     int prev = 0;
                     if(!prevCharIsNumber) {
-                        res = new NestedInteger(0);
-                        if(!stack.empty()) {
-                            stack.peek().getList().add(res);
+                        cur = new NestedInteger(0);
+                        if(res == null) {
+                        	res = cur;
+                        } else {
+                            stack.peek().getList().add(cur);
                         }
                     } else { //NoteNote
-                        prev = res.getInteger();
+                        prev = cur.getInteger();
                     }
                     if(c == '-') {
                         isNeg = true;
                     } else {
                         if(isNeg) {
-                            res.setInteger((int)(prev * 10 - (c - '0')));
+                            cur.setInteger((int)(prev * 10 - (c - '0')));
                         } else {
-                            res.setInteger((int)(prev * 10 + (c - '0')));
+                            cur.setInteger((int)(prev * 10 + (c - '0')));
                         }
                     }
                     prevCharIsNumber = true;
@@ -59,13 +62,15 @@ public class Solution {
                     isNeg = false;
                     prevCharIsNumber = false;
                     if(c == '[') {
-                        res = new NestedInteger();
-                        if(!stack.empty()) {
-                            stack.peek().getList().add(res);
+                        cur = new NestedInteger();
+                        if(res == null) {
+                        	res = cur;
+                        } else {
+                            stack.peek().getList().add(cur);
                         }
-                        stack.push(res);
+                        stack.push(cur);
                     } else if(c == ']') {
-                        res = stack.pop();//last popped one would definitely be result
+                        stack.pop();//last popped one would definitely be result
                     }
                 }
             }
