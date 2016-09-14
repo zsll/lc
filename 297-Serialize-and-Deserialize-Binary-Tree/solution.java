@@ -50,7 +50,6 @@ public String serialize(TreeNode root) {
                 preNullNum++;
                 continue;
             }
-            boolean isLeft = true;
             int leftChildIndex = i*2 + 1 - preNullNum * 2;//NoteNote: have to make a second scan to find children
             int rightChildIndex = i*2 + 2 - preNullNum * 2;
             if(leftChildIndex >= l) {
