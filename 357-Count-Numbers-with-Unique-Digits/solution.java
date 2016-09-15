@@ -11,7 +11,7 @@ public class Solution {
                 res += f[2];
                 //f[3] from 100 to 999, 9*9*8
                 //if n = 10, not possible
-                for(int i = 3; i <= Math.min(n, 9); i++) {
+                for(int i = 3; i <= Math.min(n, 10); i++) {
                     f[i] = f[i - 1]*(11 - i);
                     res += f[i];
                 }
