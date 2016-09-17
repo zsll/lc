@@ -1,6 +1,7 @@
 public class Solution {
-    public List<List<Integer>> combinationSum3(int k, int n) {
-       List<List<Integer>> res = new ArrayList<List<Integer>>();
+
+  public List<List<Integer>> combinationSum3(int k, int n) {
+    	List<List<Integer>> res = new ArrayList<List<Integer>>();
     	if(k > 0 && n >= k) {
     		List<Integer> curList = new ArrayList<Integer>();
     		combinationSum3Helper(k, n, 1, res, curList);
@@ -18,10 +19,12 @@ public class Solution {
      * @param curList
      */
     void combinationSum3Helper(int k, int remain, int start,  List<List<Integer>> res, List<Integer> curList) {
-    	if(remain == 0 && curList.size() == k) {
-    		//Collections.sort(curList);
-    		List<Integer> clone = new ArrayList<Integer>(curList);	//NoteNote: we need a clone!
-    		res.add(clone);
+    	if(curList.size() == k) {
+	    	if(remain == 0) {
+	    		//Collections.sort(curList);
+	    		List<Integer> clone = new ArrayList<Integer>(curList);	//NoteNote: we need a clone!
+	    		res.add(clone);
+	    	}
     	} else {
     	//} else if (remain >= start) {
     		for(int j = start; j <= Math.min(9, remain); j++) {
