@@ -18,10 +18,10 @@ public class Solution {
     void pathSumDFS(TreeNode root, int sum, List<List<Integer>> res, List<Integer> cur) {
         if(root != null) {
             cur.add(root.val);
-            if(root.val == sum && root.left == null && root.right == null) {
+            sum -= root.val;
+            if(0 == sum && root.left == null && root.right == null) {
                 res.add(new ArrayList<Integer>(cur));
             } else {
-                sum -= root.val;
                 pathSumDFS(root.left, sum, res, cur);
                 pathSumDFS(root.right, sum, res, cur);
             }
