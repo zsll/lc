@@ -1,30 +1,25 @@
 public class Solution {
     public List<List<Integer>> combine(int n, int k) {
-    	List<List<Integer>> r= new ArrayList<List<Integer>>();
-        if(n > 0 && n >= k) {
-        	int [] a = new int[n];
-        	for(int i = 0; i< n; i++) {
-        		a[i] = i + 1;
-        	}
-        	List<Integer> c = new ArrayList<Integer>();
-        	combineHelper(a, k, 0, r, c);
-        }
-        return r;
+    	List<List<Integer>> r = new ArrayList<List<Integer>>();
+    	List<Integer> c = new ArrayList<Integer>();
+    	HashSet<Integer> v = new HashSet<Integer>();
+    	combineHelperPermutationStyle(n, k, 1, r, c, v);
+    	return r;
     }
     
-    void combineHelper(int [] a, int k, int pos, List<List<Integer>> r, List<Integer> c) {
-    	if(pos == k) {
-    		List<Integer> c2 = new ArrayList<Integer>(c);
-    		r.add(c2);
-    	}
-    	int start = 0;
-    	if(c.size() > 0) {
-    		start = c.get(c.size() - 1);
-    	}
-    	for(int i= start; i < a.length; i++) {
-    		c.add(a[i]);
-    		combineHelper(a, k, pos + 1, r, c);
-    		c.remove(pos);
+    void combineHelperPermutationStyle(int n, int k, int start, List<List<Integer>> r, List<Integer> c, HashSet<Integer> v) {
+    	if(c.size() == k) {
+    	    r.add(new ArrayList<Integer>(c));
+    	} else {
+    	    for(int i = start; i <= n; i++) {
+    	        if(!v.contains(i)) {
+    	            c.add(i);
+    	            v.add(i);
+    	            combineHelperPermutationStyle(n, k, i + 1, r, c, v);
+    	            c.remove(c.size() - 1);
+    	            v.remove(i);
+    	        }
+    	    }
     	}
     }
 }
