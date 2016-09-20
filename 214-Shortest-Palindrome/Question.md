@@ -15,9 +15,9 @@ Special thanks to [@ifanchu](https://leetcode.com/discuss/user/ifanchu) for addi
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Pocket Gems](/company/pocket-gems/) [Google](/company/google/)</span></div>
 
 <div>
 
