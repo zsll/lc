@@ -25,10 +25,10 @@ public class Solution {
          * @return
          */
        private int findValidMax(int[] count, int[] valid, int index){
-           int max = Integer.MIN_VALUE;
+           int max = 0;
            int candidatePos = -1;
            for(int i=0;i<count.length;i++){//There are at most 26 chars, so complexity would be at most 26N
-               if(count[i]>0 && count[i]>max && index>=valid[i]){	
+               if(count[i]>max && index>=valid[i]){	
             	   //Find char with largest frequency and valid position is larger than or equal to the position to fill
                    max = count[i];
                    candidatePos = i;
