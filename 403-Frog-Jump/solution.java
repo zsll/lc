@@ -10,32 +10,18 @@ public class Solution {
      * 
      */
     public boolean canCross(int[] stones) {
-         boolean res = true;
-        if(stones != null && stones.length > 1) {
-            int len = stones.length;
-            boolean [][] dp = new boolean[len][len];
-             res = false;
-            if(stones[1] - stones[0] == 1) {
-                dp[1][1] = true;
-                for(int i = 2; i < len; i++) {
-
-                    for(int j = 1; j <= i; j++) {
-                        for(int k = 1; k <= i - 1; k++) {
-                            if(stones[i] - stones[k] == j && (j - 1 >= 1 && dp[k][j - 1] || dp[k][j] || j + 1 < len && dp[k][j + 1] ) ){
-                                dp[i][j] = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                for(int i = 1; i < dp[len - 1].length; i++) {
-                    if(dp[len - 1][i]) {
-                        res = true;
-                        break;
-                    }
-                }
+        if(stones[1] > 1) return false;
+        if(stones.length == 2) return true;
+        return helper(stones, 1, 1);
+    }
+    private boolean helper(int[] arr, int i, int step){
+        boolean pass = false;
+        if(i == arr.length-1) return true;
+        for(int j = i+1; j < arr.length; j++){
+            if(arr[j] <= arr[i] + step + 1 && arr[j] >= arr[i]+step-1){
+                pass = pass || helper(arr, j, arr[j] - arr[i]);
             }
         }
-        return res;
+        return pass;
     }
 }
