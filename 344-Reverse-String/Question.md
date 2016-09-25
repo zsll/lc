@@ -9,12 +9,6 @@ Given s = "hello", return "olleh".
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Two Pointers](/tag/two-pointers/) [String](/tag/string/)</span></div>
