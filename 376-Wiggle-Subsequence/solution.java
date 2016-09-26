@@ -21,14 +21,14 @@ dp2 i equals max of dp1 j + 1, j = 0 ... i - 1, and num j is smaller than num i
 	 
 	 
 	    for(int i=1, j=0; i<nums.length; j=i, i++){
-	        if(nums[j]<nums[i]){
-	            count++;
-	            while(i<nums.length-1 && nums[i]<=nums[i+1]){
-	                i++;
-	            }
-	        }else if(nums[j]>nums[i]){
+	        if(nums[j]>nums[i]){
 	            count++;
 	            while(i<nums.length-1 && nums[i]>=nums[i+1]){
+	                i++;
+	            }
+	        } else if(nums[j]<nums[i]){
+	            count++;
+	            while(i<nums.length-1 && nums[i]<=nums[i+1]){
 	                i++;
 	            }
 	        }
