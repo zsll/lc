@@ -1,7 +1,7 @@
 public class Solution {
     public int majorityElement(int[] a) {
-        int m = a[0], count = 1;
-        for(int i = 1; i < a.length; i++) {
+        int m = a[0], count = 0;
+        for(int i = 0; i < a.length; i++) {
             if(a[i] == m) {
                 count++;
             } else {
