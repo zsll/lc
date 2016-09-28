@@ -21,12 +21,6 @@ Special thanks to [@yunhong](https://discuss.leetcode.com/user/yunhong) for addi
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Binary Search Tree](/tag/binary-search-tree/)</span></div>
