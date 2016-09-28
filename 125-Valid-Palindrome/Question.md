@@ -15,15 +15,9 @@ For the purpose of this problem, we define empty string as valid palindrome.
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Facebook](/company/facebook/) [Microsoft](/company/microsoft/) [Uber](/company/uber/) [Zenefits](/company/zenefits/)</span></div>
+<span class="hidebutton">[Microsoft](/company/microsoft/) [Uber](/company/uber/) [Facebook](/company/facebook/) [Zenefits](/company/zenefits/)</span></div>
 
 <div>
 
