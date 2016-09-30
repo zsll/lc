@@ -7,10 +7,9 @@ public class Solution {
             dp[0] = true;
             for(int i = 1; i < len + 1; i++) {
                 for(String s1 : wordDict) {
-                    if(i >= s1.length() && dp[i - s1.length()]) {
-                        if(s.substring(i - s1.length(), i).equals(s1)) {
+                    if(i >= s1.length() && dp[i - s1.length()] && s.substring(i - s1.length(), i).equals(s1)) {
                             dp[i] = true;
-                        }
+                        break;
                     }
                 }
             }
