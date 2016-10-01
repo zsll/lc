@@ -13,9 +13,9 @@ Special thanks to [@jianchao.li.fighter](https://leetcode.com/discuss/user/jianc
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Facebook](/company/facebook/)</span></div>
 
 <div>
 
@@ -27,4 +27,4 @@ Special thanks to [@jianchao.li.fighter](https://leetcode.com/discuss/user/jianc
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(M) Search for a Range](/problems/search-for-a-range/) [(M) Search Insert Position](/problems/search-insert-position/)</span></div>
+<span class="hidebutton">[(M) Search for a Range](/problems/search-for-a-range/) [(M) Search Insert Position](/problems/search-insert-position/) [(E) Guess Number Higher or Lower](/problems/guess-number-higher-or-lower/)</span></div>
