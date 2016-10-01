@@ -1,12 +1,15 @@
 public class Solution {
     public void moveZeroes(int[] nums) {
-        int to = 0;
+        int end = 0;
         for(int i = 0; i < nums.length; i++) {
             if(nums[i] != 0) {
-                nums[to++] = nums[i];
+                if(i > end) {
+                    nums[end] = nums[i];
+                }
+                end++;
             }
         }
-        for(int i = to; i < nums.length; i++) {
+        for(int i = end; i < nums.length; i++) {
             nums[i] = 0;
         }
     }
