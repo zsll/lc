@@ -7,6 +7,9 @@ public class Solution {
             char [] a = s.toCharArray();
             for(int i = 1; i <= s.length();i++) {
                 dp[i%3] = 0;
+                if(dp[(i - 1)%3] == 0 && dp[(i - 2)%3] == 0) {
+                    break;
+                }
                 if(canUse1(a, i - 1)) {
                     dp[i%3] += dp[(i - 1)%3];
                 }
