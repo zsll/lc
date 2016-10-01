@@ -6,9 +6,9 @@ Merge _k_ sorted linked lists and return it as one sorted list. Analyze and desc
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[LinkedIn](/company/linkedin/) [Google](/company/google/) [Uber](/company/uber/) [Airbnb](/company/airbnb/) [Facebook](/company/facebook/) [Twitter](/company/twitter/) [Amazon](/company/amazon/) [Microsoft](/company/microsoft/)</span></div>
 
 <div>
 
