@@ -1,45 +1,34 @@
 public class Solution {
     public int numIslands(char[][] grid) {
-        int h = grid.length, r = 0;
-        if(h > 0) {
-        	int w = grid[0].length;
-        	if(w > 0) {
-        		for(int i = 0; i < w*h; i++) {
-        			int row = i/w, col = i%w;
-        			if(grid[row][col] == '1') {
-        				grid[row][col] = '0';
-        				BFSTraversal(grid, row, col);
-        				r++;
-        			}
-        		}
-        	}
+        int res = 0;
+        if(grid != null && grid.length > 0 && grid[0].length > 0) {
+            int h = grid.length, w = grid[0].length;
+            for(int i = 0; i < h; i++) {
+                for(int j = 0; j < w; j++) {
+                    if(grid[i][j] == '1') {
+                        res++;
+                        dfs(grid, i, j);
+                    }
+                }
+            }
         }
-        return r;
+        return res;
     }
     
-    private void BFSTraversal(char[][] grid, int r, int c) {
-    	int h = grid.length, w = grid[0].length;
-    	List<Integer> q = new LinkedList<Integer>();
-    	q.add(r); q.add(c);
-    	while(q.size() > 0) {
-    		int cr = q.remove(0), cc = q.remove(0);
-    		if(cr > 0 && grid[cr - 1][cc] == '1') {
-    			q.add(cr - 1);q.add(cc);
-    			grid[cr - 1][cc] = '0';
-    		}
-    		if(cr < h - 1 && grid[cr + 1][cc] == '1') {
-    			q.add(cr + 1);q.add(cc);
-    			grid[cr + 1][cc] = '0';
-    		}
-    		if(cc > 0 && grid[cr][cc - 1] == '1') {
-    			q.add(cr);q.add(cc - 1);
-    			grid[cr][cc - 1] = '0';
-    		}
-    		if(cc < w - 1 && grid[cr][cc + 1] == '1') {
-    			q.add(cr);q.add(cc + 1);
-    			grid[cr][cc + 1] = '0';
-    		}
-    	}
-    	
+    void dfs(char [][] grid, int i, int j) {
+        grid[i][j] = '0';
+        int h = grid.length, w = grid[0].length;
+        int [][] dir = {
+            {0, 1},
+            {1, 0},
+            {0, -1},
+            {-1, 0}
+        };
+        for(int k = 0; k < 4; k++) {
+            int x = i + dir[k][0], y = j + dir[k][1];
+            if(x >= 0 && x < h && y >= 0 && y < w && grid[x][y] == '1') {
+                dfs(grid, x, y);
+            }
+        }
     }
 }
