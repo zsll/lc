@@ -11,7 +11,7 @@ public class Solution {
                     if(j >= 2 && dp[i][j - 2] && p.charAt(j - 1) == '*' && p.charAt(j - 2) != '*') {
                         dp[i%2][j] = true;
                     }
-                } else if (j > 0 && i > 0) {    //Note Note
+                } else if (j > 0 ) {    //Note Note
                     if(p.charAt(j - 1) != '*') {
                         if(s.charAt(i - 1) == p.charAt(j - 1) ||  p.charAt(j - 1) == '.') {
                             dp[i%2][j] = dp[(i - 1)%2][j - 1];
