@@ -24,15 +24,9 @@ isMatch("aab", "c*a*b") → true
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Airbnb](/company/airbnb/) [Facebook](/company/facebook/) [Google](/company/google/) [Twitter](/company/twitter/) [Uber](/company/uber/)</span></div>
+<span class="hidebutton">[Google](/company/google/) [Uber](/company/uber/) [Airbnb](/company/airbnb/) [Facebook](/company/facebook/) [Twitter](/company/twitter/)</span></div>
 
 <div>
 
