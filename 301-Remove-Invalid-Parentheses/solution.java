@@ -1,74 +1,45 @@
 public class Solution {
-
-   public List<String> removeInvalidParentheses(String s) {
-       List<String> res = new ArrayList<String>();
-       if(s != null ) {
-           /* NoteNote
-            * Can't have s.length != 0
-            * && s.length() > 0
-            */
-           List<StringBuffer> stringQ = new ArrayList<StringBuffer>();
-           List<Integer> usedL = new ArrayList<Integer>();
-           List<Integer> usedR = new ArrayList<Integer>();
-           stringQ.add(new StringBuffer());
-           usedL.add(0);
-           usedR.add(0);
-           for(char c : s.toCharArray()) {
-               List<StringBuffer> stringQNext = new ArrayList<StringBuffer>();
-               List<Integer> usedLNext = new ArrayList<Integer>();
-               List<Integer> usedRNext = new ArrayList<Integer>();
-               for(int i = 0; i < stringQ.size(); i++) {
-                   int usedLeft = usedL.get(i);
-                   int usedRight = usedR.get(i);
-                           StringBuffer sb = new StringBuffer(stringQ.get(i));
-                   if(c != ')' && c!= '(') {
-                       
-                           stringQNext.add(sb.append(c));
-                           usedLNext.add(usedLeft);
-                           usedRNext.add(usedRight);
-                   } else if(c == '(') {
-                           //Use Left
-                           stringQNext.add(sb.append(c));
-                           usedLNext.add(usedLeft + 1);
-                           usedRNext.add(usedRight);
-                           //Remove left
-                           sb = new StringBuffer(stringQ.get(i));
-                           stringQNext.add(sb);
-                           usedLNext.add(usedLeft);
-                           usedRNext.add(usedRight);
-                   } else {    //right
-                       if(usedRight + 1 <= usedLeft) {
-                           stringQNext.add(sb.append(c));
-                           usedLNext.add(usedLeft);
-                           usedRNext.add(usedRight + 1);
-                       }
-                       //Remove right
-                           sb = new StringBuffer(stringQ.get(i));
-                           stringQNext.add(sb);
-                           usedLNext.add(usedLeft);
-                           usedRNext.add(usedRight);
-                   }
-               }
-               
-                   stringQ = stringQNext;
-                   usedL = usedLNext;
-                   usedR = usedRNext;
-           }
-           int maxSize = 0;
-               for(int i = 0; i < stringQ.size(); i++) {
-                   if(usedL.get(i) == usedR.get(i)) {
-                       maxSize = Math.max(maxSize, stringQ.get(i).length());
-                   }
-               }
-           Set<String> visited = new HashSet<String>();
-           for(int i = 0; i < stringQ.size(); i++) {
-                   if(stringQ.get(i).length() == maxSize && !visited.contains(stringQ.get(i).toString()) && usedL.get(i) == usedR.get(i)) {
-                       visited.add(stringQ.get(i).toString());
-                       res.add(stringQ.get(i).toString());
-                   }
-               }
-       }
-       return res;
-   }
-   
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> res = new ArrayList<String>();
+        StringBuffer sb = new StringBuffer();
+        int [] maxLen = {0};
+        dfs(s, 0, 0, 0, sb, res, maxLen);
+        return res;
+    }
+    
+    void dfs(String s, int i, int usedLeft, int usedRight, StringBuffer sb, List<String> res, int [] maxLen) {
+        if(i == s.length() && usedLeft == usedRight && (maxLen[0] == 0 || sb.length() == maxLen[0])
+            && res.indexOf(new String(sb)) == -1
+            /**
+             * Input:
+"()())()"
+Output:
+["()()()","()()()","(())()"]
+Expected:
+["(())()","()()()"]
+*/
+        ) {
+            res.add(new String(sb));
+            maxLen[0] = sb.length();
+        } else if (i < s.length()) {    //NoteNote this if
+            char c = s.charAt(i);
+            if(c == '(') {
+                sb.append(c);
+                dfs(s, i + 1, usedLeft + 1, usedRight, sb, res, maxLen);
+                sb.deleteCharAt(sb.length() - 1);
+                dfs(s, i + 1, usedLeft, usedRight, sb, res, maxLen);
+            } else if (c == ')') {
+                if(usedRight < usedLeft) {
+                    sb.append(c);
+                    dfs(s, i + 1, usedLeft, usedRight + 1, sb, res, maxLen);
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+                dfs(s, i + 1, usedLeft, usedRight, sb, res, maxLen);
+            } else {
+                sb.append(c);
+                dfs(s, i + 1, usedLeft, usedRight, sb, res, maxLen);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+        }
+    }
 }
