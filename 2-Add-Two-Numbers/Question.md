@@ -9,15 +9,9 @@ You are given two linked lists representing two non-negative numbers. The digits
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Adobe](/company/adobe/) [Airbnb](/company/airbnb/) [Amazon](/company/amazon/) [Bloomberg](/company/bloomberg/) [Microsoft](/company/microsoft/)</span></div>
+<span class="hidebutton">[Amazon](/company/amazon/) [Microsoft](/company/microsoft/) [Bloomberg](/company/bloomberg/) [Airbnb](/company/airbnb/) [Adobe](/company/adobe/)</span></div>
 
 <div>
 
