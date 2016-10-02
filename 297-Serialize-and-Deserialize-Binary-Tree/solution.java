@@ -8,61 +8,53 @@
  * }
  */
 public class Codec {
-public String serialize(TreeNode root) {
-        // write your code here
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
         StringBuffer sb = new StringBuffer();
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        q.offer(root);
-        while(q.size() > 0) {
-            TreeNode c = q.poll();
-            if(sb.length() > 0) {
-                sb.append(',');
-            }
-            if(c == null) {
-                sb.append('#');
-            } else {
-                sb.append(c.val);
-                q.offer(c.left);
-                q.offer(c.right);
+        if(root != null) {
+            Queue<TreeNode> q = new LinkedList<TreeNode>();
+            q.offer(root);
+            while(!q.isEmpty()) {
+                TreeNode cur = q.poll();
+                if(cur == null) {
+                    sb.append("#");
+                } else {
+                    sb.append(cur.val);
+                    q.offer(cur.left);
+                    q.offer(cur.right);
+                }
+                sb.append(",");
             }
         }
         return sb.toString();
     }
+
+    // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if(data == null || data.length() == 0) {
-            return null;    //NoteNote
-        }
-        // write your code here
-        String [] sA = data.split(","); //NoteNote, use "", not ''
-        int l = sA.length;
-        TreeNode [] tA = new TreeNode[l];
-        for(int i = 0; i < l; i++) {
-            String s = sA[i];
-            if(s.equals("#")) {
-                tA[i] = null;
-            } else {
-                tA[i] = new TreeNode(Integer.parseInt(s));
+        TreeNode res = null;
+        if(data.length() > 0) {
+            String [] val = data.split(",");
+            int len = val.length;
+            TreeNode [] a = new TreeNode[len];
+            for(int i = 0; i < len; i++) {
+                a[i] = null;
+                if(!val[i].equals("#")) {
+                    a[i] = new TreeNode(Integer.parseInt(val[i]));
+                }
+            }
+            int preNull = 0;
+            res = a[0];
+            for(int i = 0; i < len; i++) {
+                if(a[i] == null) {
+                    preNull++;
+                } else {
+                    a[i].left = a[i*2 + 1 - 2*preNull];
+                    a[i].right = a[i*2 + 2 - 2*preNull];
+                }
             }
         }
-        int preNullNum = 0;
-        for(int i = 0; i < l; i++) {
-            if( tA[i] == null) {
-                preNullNum++;
-                continue;
-            }
-            int leftChildIndex = i*2 + 1 - preNullNum * 2;//NoteNote: have to make a second scan to find children
-            int rightChildIndex = i*2 + 2 - preNullNum * 2;
-            if(leftChildIndex >= l) {
-                break;
-            }
-            tA[i].left = tA[leftChildIndex];
-            if(rightChildIndex >= l) {
-                break;
-            }
-            
-            tA[i].right = tA[rightChildIndex];
-        }
-        return tA[0];
+        return res;
     }
 }
 
