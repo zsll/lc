@@ -37,7 +37,7 @@ public class Solution {
                     return a.x - b.x;
                 } else {
                     if(a.isStart != b.isStart) {
-                        return a.isStart ? 1 : -1;
+                        return a.isStart ? -1 : 1;
                     } else {
                         if(a.isStart) {
                             return b.y - a.y;
