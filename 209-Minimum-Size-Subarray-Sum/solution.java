@@ -2,25 +2,17 @@ public class Solution {
     public int minSubArrayLen(int s, int[] nums) {
         int res = Integer.MAX_VALUE;
         if(nums != null && nums.length > 0 && s > 0) {
-            TreeMap<Integer, Integer> m = new TreeMap<Integer, Integer>();
-            
-            m.put(0, 0);
-            int sum = nums[0];
-            m.put(sum, 1);
-            if(sum >= s) {
-                res = 1;
-            } else {
-                for(int i  = 1; i < nums.length; i++) {
-                    sum += nums[i];
-                    //sum - preSum >= s
-                    Integer preSum = m.lowerKey(sum - s + 1);
-                    if(preSum != null) {
-                        int preIndex = m.get(preSum);
-                        res = Math.min(i + 1 - preIndex, res);
-                    }
-                    m.put(sum, i + 1);
-                }
-            }
+           int sum = 0, j = 0;
+           for(int i = 0; i < nums.length; i++) {
+               while(j < nums.length && sum < s) {
+                   sum += nums[j];
+                   j++;
+               }
+               if(sum >= s) {
+                   res = Math.min(res, j - i);
+               }
+               sum -= nums[i];
+           }
         }
         
             if(res == Integer.MAX_VALUE) {  //NoteNote
