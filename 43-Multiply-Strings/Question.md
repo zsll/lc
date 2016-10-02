@@ -12,12 +12,6 @@ Given two numbers represented as strings, return multiplication of the numbers a
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
 <span class="hidebutton">[Facebook](/company/facebook/) [Twitter](/company/twitter/)</span></div>
