@@ -1,59 +1,32 @@
 public class Solution {
     public boolean isPalindrome(String s) {
-        
-    	 
-        if(s == null) return false;
-        if(s.length() < 2) return true;
- 
-        char[] charArray = s.toCharArray();
-        int len = s.length();
- 
-        int i=0;
-        int j=len-1;
- 
-        while(i<j){
-            char left = charArray[i], right = charArray[j];
- 
-            while(i<j && !isAlpha(left) && !isNum(left)){
-                left =  charArray[++i];
+        boolean res = true;
+        if(s != null && s.length() > 0) {
+            int i = 0, j = s.length() - 1;
+            while(i < j) {
+                while(!isAlpha(s.charAt(i)) && i < j) {
+                    i++;
+                }
+                while(!isAlpha(s.charAt(j)) && i < j) {
+                    j--;
+                }
+                if(i < j && !charEqauls(
+                    s.charAt(i), s.charAt(j)
+                    )
+                ) {
+                    res = false;
+                    break;
+                }
             }
- 
-            while(j>i && !isAlpha(right) && !isNum(right)){
-                right = charArray[--j];
-            }
-            if(!isSame(left, right)){
-                return false;
-            }
- 
-            i++;
-            j--;
         }
-        return true;
+        return res;
     }
- 
-    public  boolean isAlpha(char a){
-        if((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z')){
-            return true;
-        }else{
-            return false;
-        }
+    
+    boolean isAlpha(char c) {
+        return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';
     }
- 
-    public  boolean isNum(char a){
-        if(a >= '0' && a <= '9'){
-            return true;
-        }else{
-            return false;
-        }
-    }
- 
-    public  boolean isSame(char a, char b){
-        if(isNum(a) && isNum(b)){
-            return a == b;
-        }else if(Character.toLowerCase(a) == Character.toLowerCase(b)){	//NoteNote: Character.toLowerCase
-            return true;
-        }else{
-            return false;
-        }
+    
+    boolean charEqauls(char a, char b) {
+        return Character.toLowerCase(a) == Character.toLowerCase(b);
     }
 }
