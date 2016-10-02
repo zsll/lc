@@ -9,44 +9,29 @@
  */
 
 public class BSTIterator {
+    Stack<TreeNode> s = new Stack<TreeNode>();
+    public BSTIterator(TreeNode root) {
+        pushLeft(root);
+    }
 
-   Stack<TreeNode> s = null;
-		//boolean needsToPushLeft = true;
-	    public BSTIterator(TreeNode root) {
-	    	s = new Stack<TreeNode>();
-	        if(root != null) {
-	        	s.push(root);
-	        	pushLeft();
-	        }
-	    }
+    /** @return whether we have a next smallest number */
+    public boolean hasNext() {
+        return !s.empty();
+    }
 
-	    /** @return whether we have a next smallest number */
-	    public boolean hasNext() {
-	        return !s.empty();
-	    }
-
-	    /** @return the next smallest number */
-	    public int next() {
-	    	int result = -1;
-	        if(this.hasNext()) {
-	        	TreeNode itr = s.pop();
-	        	result = itr.val;
-	        	//needsToPushLeft = false;
-	        	if(itr.right!=null) {
-	        		s.push(itr.right);
-	        		//needsToPushLeft = true;
-
-		        	pushLeft();
-	        	}
-	        } 
-	        return result;
-	    }
-
-		private void pushLeft() {
-			while(s.peek().left != null) {
-				s.push(s.peek().left);
-			}
-		}
+    /** @return the next smallest number */
+    public int next() {
+        TreeNode res = s.pop();
+        pushLeft(res.right);
+        return res.val;
+    }
+    
+    void pushLeft(TreeNode n) {
+        while(n != null) {
+            s.push(n);
+            n = n.left;
+        }
+    }
 }
 
 /**
