@@ -6,15 +6,9 @@ Implement pow(_x_, _n_).
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Bloomberg](/company/bloomberg/) [Facebook](/company/facebook/) [Google](/company/google/) [LinkedIn](/company/linkedin/)</span></div>
+<span class="hidebutton">[LinkedIn](/company/linkedin/) [Google](/company/google/) [Bloomberg](/company/bloomberg/) [Facebook](/company/facebook/)</span></div>
 
 <div>
 
@@ -26,4 +20,4 @@ Implement pow(_x_, _n_).
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(M) Sqrt(x)](/problems/sqrtx/)</span></div>
+<span class="hidebutton">[(M) Sqrt(x)](/problems/sqrtx/) [(M) Super Pow](/problems/super-pow/)</span></div>
