@@ -13,9 +13,9 @@ Could you solve it with constant space complexity? (Note: The output array **doe
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Amazon](/company/amazon/) [LinkedIn](/company/linkedin/) [Apple](/company/apple/) [Facebook](/company/facebook/) [Microsoft](/company/microsoft/)</span></div>
 
 <div>
 
