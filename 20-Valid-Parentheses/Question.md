@@ -8,15 +8,9 @@ The brackets must close in the correct order, `"()"` and `"()[]{}"` are all vali
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Airbnb](/company/airbnb/) [Amazon](/company/amazon/) [Bloomberg](/company/bloomberg/) [Facebook](/company/facebook/) [Google](/company/google/) [Microsoft](/company/microsoft/) [Twitter](/company/twitter/) [Zenefits](/company/zenefits/)</span></div>
+<span class="hidebutton">[Google](/company/google/) [Airbnb](/company/airbnb/) [Facebook](/company/facebook/) [Twitter](/company/twitter/) [Zenefits](/company/zenefits/) [Amazon](/company/amazon/) [Microsoft](/company/microsoft/) [Bloomberg](/company/bloomberg/)</span></div>
 
 <div>
 
