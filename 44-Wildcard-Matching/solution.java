@@ -19,11 +19,12 @@ public class Solution {
                 } else {
                     dp[0][j] = dp[0][j - 1];
                     int k = 0;
-                    while(!dp[k][j - 1]) {
+                    while(k <= sLen && !dp[k][j - 1]) {
                         k++;
                     }
                     while(k <= sLen) {
                         dp[k][j] = true;
+                        k++;
                     }
                 }
             }
