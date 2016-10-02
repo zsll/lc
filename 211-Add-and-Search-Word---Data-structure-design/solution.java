@@ -10,11 +10,22 @@ public class WordDictionary {
     public boolean search(String word) {
         return t.search(word);
     }
-}
-
-class TrieNode {
+    
+    class TrieNode {
     TrieNode [] children = new TrieNode[26];
     boolean isWord;
+    
+    public void add(String word, int startPos) {
+        if(startPos == word.length()) {
+            isWord = true;
+        } else {
+            char c = word.charAt(startPos);
+            if(this.children[c - 'a'] == null) {
+                this.children[c - 'a'] = new TrieNode();
+            }
+            this.children[c - 'a'].add(word, startPos + 1);
+        }
+    }
     
     public boolean search(String word, int startPos) {
         if(startPos == word.length()) {
@@ -43,27 +54,17 @@ class TrieNode {
 class Trie {
     TrieNode root = new TrieNode();
     
-    boolean add(String word) {
-        TrieNode cur = root;
-        for(char c : word.toCharArray()) {
-            if(cur.children[c - 'a'] == null) {
-                cur.children[c - 'a'] = new TrieNode();
-            }
-            cur = cur.children[c - 'a'];
-        }
-        boolean res = true;
-        if(cur.isWord) {
-            res = false;
-        } else {
-            cur.isWord = true;
-        }
-        return res;
+    void add(String word) {
+        root.add(word, 0);
     }
     
     boolean search(String word) {
         return root.search(word, 0);
     }
 }
+}
+
+
 
 
 
