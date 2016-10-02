@@ -12,9 +12,9 @@ You may assume no duplicate exists in the array.
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[LinkedIn](/company/linkedin/) [Bloomberg](/company/bloomberg/) [Uber](/company/uber/) [Facebook](/company/facebook/) [Microsoft](/company/microsoft/)</span></div>
 
 <div>
 
