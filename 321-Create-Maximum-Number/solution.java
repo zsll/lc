@@ -1,38 +1,17 @@
 public class Solution {
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
-        int[] ans = new int[k];
-        for (int i = Math.max(k - nums2.length, 0); i <= Math.min(nums1.length, k); i++) {
-            int[] res1 = solve(nums1, i);
-            int[] res2 = solve(nums2, k - i);
-            int[] res = new int[k];
-            int pos1 = 0, pos2 = 0, tpos = 0;
-
-            while (pos1 < res1.length || pos2 < res2.length) {
-                res[tpos++] = compare(res1, pos1, res2, pos2) ? res1[pos1++] : res2[pos2++];
+        int [] res = new int[k];
+        for(int i = 0; i <= k; i++) {    //pick i numbers from one, pick k - i numbers from the other
+            int [] a1 = pick(nums1, i);
+            int [] a2 = pick(nums2, k - i);
+            if(a1 != null && a2 != null) {
+                int [] a3 = merge(a1, a2);
+                if(compare(res, a3) < 0) {
+                    res = a3;
+                }
             }
-
-            if (!compare(ans, 0, res, 0))
-                ans = res;
         }
-
-        return ans;
-    }
-
-    /**
-     * NoteNote 9 8 7 > 1 2
-     * 4 5 < 4 5 1
-     * @param nums1
-     * @param start1
-     * @param nums2
-     * @param start2
-     * @return
-     */
-    public boolean compare(int[] nums1, int start1, int[] nums2, int start2) {
-        for (; start1 < nums1.length && start2 < nums2.length; start1++, start2++) {
-            if (nums1[start1] > nums2[start2]) return true;
-            if (nums1[start1] < nums2[start2]) return false;
-        }
-        return start1 != nums1.length;
+        return res;
     }
     int compare(int [] a1, int [] a2) {
         int i = 0;
@@ -47,20 +26,6 @@ public class Solution {
         } else {
             return 1;
         }
-    }
-    public int[] solve(int[] nums, int k) {
-        int[] res = new int[k];
-        int len = 0;
-        for (int i = 0; i < nums.length; i++) {
-            while (len > 0 && //Can minus
-            		len - 1 + nums.length - i >= k && //remaining number plus existing len can compose a total length of K
-            		res[len - 1] < nums[i]) {	//can pick up current number
-                len--;
-            }
-            if (len < k)
-                res[len++] = nums[i];
-        }
-        return res;
     }
     
     int [] merge(int [] a1, int [] a2) {
@@ -83,19 +48,9 @@ public class Solution {
                     } else {
                         res[i + j] = a1[i++];
                     }
-                } else if(i + k == l1 && j+k < l2 && a1[i] > a2[j+k] 
-                    || j + k == l2 && i + k < l1 && a2[j] < a1[i+k]) {
+                } else if(i + k == l1) {
                     /** Special handling when equals, needs to go to next unequal pos,
-                     * if next that position is end, consider the following case
-                     * 9 0
-                     * 9
-                     * since 9 is larger than 0, we should advance second
-                     * 
-                     * but if it's
-                     * 1 8
-                     * 1
-                     * 
-                     * we should advance first
+                     * we should move the unfinished
                      * 
                      * Submission Result: Wrong Answer More Details 
 
@@ -108,9 +63,9 @@ Output:
 Expected:
 [7,3,8,2,5,6,4,4,0,6,5,7,6,2,0]
 */
-                    res[i + j] = a1[i++];
-                } else {
                     res[i + j] = a2[j++];
+                } else {
+                    res[i + j] = a1[i++];
                 }
             }
         }
@@ -142,4 +97,5 @@ Expected:
         }
         return res;
     }
+    
 }
