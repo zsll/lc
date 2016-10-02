@@ -1,31 +1,23 @@
 public class Solution {
     public List<int[]> getSkyline(int[][] buildings) {
-        List<Edge> el = produceSortedEdges(buildings);
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(10, Collections.reverseOrder());
         List<int[]> res = new ArrayList<int[]>();
+        List<Point> points = getSortedPoint(buildings);
         
-        for(Edge e : el) {
-            if(e.isStart) {
-                if(pq.size() == 0 || e.height > pq.peek()) {
-                    int [] cur = {0, 0};
-                    cur[0] = e.pos;
-                    cur[1] = e.height;
+        PriorityQueue<Integer> q = new PriorityQueue<Integer> (10, Collections.reverseOrder());
+        for(Point p : points) {
+            if(p.isStart) {
+                if(q.isEmpty() || p.y > q.peek()) {
+                    int[] cur = {p.x, p.y};
                     res.add(cur);
-                }
-                pq.offer(e.height);
+                } 
+                q.offer(p.y);
             } else {
-                pq.remove(e.height);    //can be optimized using hashheap
-                if(pq.size() == 0 || e.height > pq.peek()) {
-                    int [] cur = {0, 0};
-                    cur[0] = e.pos;
-                    if(pq.size() > 0) { //NoteNote
-                    /**
-                     * Runtime Error Message:
-Line 21: java.lang.NullPointerException
-Last executed input:
-[[0,1,3]]*/
-                        cur[1] = pq.peek();
-                    }
+                q.remove(p.y);
+                if(q.isEmpty() ) {
+                    int[] cur = {p.x, 0};
+                    res.add(cur);
+                } else if(q.peek() < p.y) {
+                    int[] cur = {p.x, q.peek()};
                     res.add(cur);
                 }
             }
@@ -33,42 +25,39 @@ Last executed input:
         return res;
     }
     
-    class Edge {
-        boolean isStart = false;
-        int height = 0, pos = 0;
-        public Edge(boolean isStart, int height, int pos) {
-            this.isStart = isStart;
-            this.height = height;
-            this.pos = pos;
+    List<Point> getSortedPoint(int [][] buildings) {
+        List<Point> res = new ArrayList<Point>();
+        for(int i = 0; i < buildings.length; i++ ) {
+            res.add(new Point(buildings[i][0], buildings[i][2], true));
+            res.add(new Point(buildings[i][1], buildings[i][2], false));
         }
-    }
-    
-    List<Edge> produceSortedEdges(int[][] buildings) {
-        List<Edge> res = new ArrayList<Edge>();
-        if(buildings != null && buildings.length > 0) {
-            for(int i = 0; i < buildings.length; i++) {
-                res.add(new Edge(true, buildings[i][2], buildings[i][0]));
-                res.add(new Edge(false, buildings[i][2], buildings[i][1]));
-            }
-            Collections.sort(res, new Comparator<Edge>() {
-                @Override
-                public int compare(Edge a, Edge b) {
-                    if(a.pos != b.pos) {
-                        return Integer.compare(a.pos, b.pos);
+        Collections.sort(res, new Comparator<Point>() {
+            public int compare(Point a, Point b) {
+                if(a.x != b.x) {
+                    return a.x - b.x;
+                } else {
+                    if(a.isStart != b.isStart) {
+                        return a.isStart ? 1 : -1;
                     } else {
-                        if(a.isStart != b.isStart) {
-                            return a.isStart ? -1 : 1;  //if one start, one end, start first
+                        if(a.isStart) {
+                            return b.y - a.y;
                         } else {
-                            if(a.isStart) { //both start, higher first
-                                return a.height >= b.height ? -1 : 1;
-                            } else {
-                                return a.height >= b.height ? 1 : -1;//both end, lower first
-                            }
+                            return a.y - b.y;
                         }
                     }
                 }
-            });
-        }
+            }
+        });
         return res;
+    }
+    
+    class Point {
+        int x, y;
+        boolean isStart;
+        public Point(int x, int y, boolean isStart) {
+            this.x = x;
+            this.y = y;
+            this.isStart = isStart;
+        }
     }
 }
