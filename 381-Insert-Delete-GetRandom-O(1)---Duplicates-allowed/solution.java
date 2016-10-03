@@ -1,54 +1,56 @@
 public class RandomizedCollection {
- 
-    HashMap<Integer, HashSet<Integer>> valToIndex = new HashMap<Integer, HashSet<Integer>>();    //key is val, value is set of index
-    HashMap<Integer, Integer> indexToVal = new HashMap<Integer, Integer>();    //key is index, value is val
+    
+    HashMap<Integer, HashSet<Integer>> vToI = new HashMap<Integer, HashSet<Integer>>();
+    HashMap<Integer, Integer> iToV = new HashMap<Integer, Integer>();
+    int size = 0;
+    
     /** Initialize your data structure here. */
     public RandomizedCollection() {
         
     }
     
-    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
-        public boolean insert(int val) {
-            boolean res = !valToIndex.containsKey(val);
-            if(res) {
-                HashSet<Integer> q = new HashSet<Integer>();
-                valToIndex.put(val, q);
-            } 
-            int size = indexToVal.size();
-            valToIndex.get(val).add(size);
-            indexToVal.put(size, val);
-            return res;
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    public boolean insert(int val) {
+        boolean res = !vToI.containsKey(val);
+        if(res) {
+            vToI.put(val, new HashSet<Integer>());
+            
         }
-        
-        /** Removes a value from the set. Returns true if the set contained the specified element. */
-        public boolean remove(int val) {
-            boolean res = valToIndex.containsKey(val);
-                if(res) {
-                    int size = indexToVal.size(); 
-                    int indexToLeave = valToIndex.get(val).iterator().next(); //NoteNote
-                    int lastVal = indexToVal.get(size - 1);
-                    valToIndex.get(val).remove(indexToLeave);
-                    if(valToIndex.get(val).size() == 0) {
-                        valToIndex.remove(val);
-                    }
-                    if(indexToLeave != size - 1) {  //We can move last of that element to the pos of the val to be deleted
-                        indexToVal.put(indexToLeave, lastVal);
-                        indexToVal.remove(size - 1);
-                        valToIndex.get(lastVal).remove(size - 1);
-                        valToIndex.get(lastVal).add(indexToLeave);
-                    } else {
-                        indexToVal.remove(indexToLeave);
-                    }
-                }
-                return res;
+        vToI.get(val).add(size);
+        iToV.put(size, val);
+        size++;
+        return res;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    public boolean remove(int val) {
+        boolean res = vToI.containsKey(val);
+        if(res) {
+            int indexToLeave = vToI.get(val).iterator().next();
+            vToI.get(val).remove(indexToLeave);
+            if(indexToLeave == size - 1) {
+                
+                iToV.remove(size - 1);
+            } else {
+                int lastVal = iToV.get(size - 1);
+                vToI.get(lastVal).remove(size - 1);
+                vToI.get(lastVal).add(indexToLeave);
+                iToV.remove(size - 1);
+                iToV.put(indexToLeave, lastVal);
+            }
+            if(vToI.get(val).size() == 0) {
+                vToI.remove(val);
+            }
+            size--;
         }
-        
-        /** Get a random element from the set. */
-        public int getRandom() {
-            Random r = new Random();
-            int i = r.nextInt(indexToVal.size());
-            return indexToVal.get(i);
-        }
+        return res;
+    }
+    
+    /** Get a random element from the collection. */
+    public int getRandom() {
+        Random r = new Random();
+        return iToV.get(r.nextInt(size));
+    }
 }
 
 /**
