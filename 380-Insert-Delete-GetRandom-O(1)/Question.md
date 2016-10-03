@@ -37,9 +37,9 @@ randomSet.getRandom();
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Google](/company/google/) [Uber](/company/uber/) [Twitter](/company/twitter/) [Amazon](/company/amazon/) [Yelp](/company/yelp/) [Pocket Gems](/company/pocket-gems/)</span></div>
 
 <div>
 
