@@ -9,18 +9,19 @@
  */
 public class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
-        return dfsWithParent(root, null);
+        int [] res = {0};
+        dfs(root, null, res);
+        return res[0];
     }
     
-    int dfsWithParent(TreeNode cur, TreeNode par) {
-        int res = 0;
+    void dfs(TreeNode cur, TreeNode parent, int [] sum) {
         if(cur != null) {
-            if(cur.left == null && cur.right == null && par != null && par.left == cur) {
-                res += cur.val;
+            if(cur.left == null && cur.right == null && parent != null && parent.left == cur) {
+                sum[0] += cur.val;
             } else {
-                res = dfsWithParent(cur.left, cur) + dfsWithParent(cur.right, cur);
+                dfs(cur.left, cur, sum);
+                dfs(cur.right, cur, sum);
             }
         }
-        return res;
     }
 }
