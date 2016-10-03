@@ -1,27 +1,27 @@
 public class Solution {
-    int []nums;
-        public Solution(int[] nums) {
-            this.nums = nums;
+
+    int[] nums = null;
+    public Solution(int[] nums) {
+        this.nums = nums;
+    }
+    
+    public int pick(int target) {
+        int res = -1, found = 0;
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] == target) {
+                found++;
+                if(found == 0) {
+                    res = i;
+                } else {
+                    Random r = new Random();
+                    if(r.nextInt(found) == 0) {
+                        res = i;
+                    }
+                }
+            }
         }
-        
-       
-
-    	public int pick(int target) {
-    		int res = -1;
-            Random r = new Random();
-            int found = 0;
-    		for(int i=0;i<nums.length;i++){
-    		    
-    		    if(target==nums[i]) {
-    		        found++;
-    		        if(r.nextInt(found) == 0) {
-    		            res = i;
-    		        }
-    		    }
-    		}
-    		return res;
-    	}
-
+        return res;
+    }
 }
 
 /**
