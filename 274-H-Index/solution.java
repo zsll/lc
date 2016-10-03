@@ -1,24 +1,23 @@
 public class Solution {
     public int hIndex(int[] citations) {
-       int res = 0;
-    	if(citations != null && citations.length > 0) {
-    		int len = citations.length;
-    		int [] cnt = new int[len + 1];
-    		for(int i = 0; i < len; i++) {
-    			int index = citations[i] > len ? len : citations[i];
-    			cnt[index]++;
-    		}
-    		int artNum = 0;
-    		for(int i = len; i >= 0; i--) {
-    			artNum += cnt[i];
-    			if(artNum < i) {
-    				;//res = artNum;	//Not needed
-    			} else { //from i, artNum >= i, So we know there are at least i articles cited i times or higher
-    				res = i;
-    				break;
-    			}
-    		}
-    	}
-    	return res;
+        //"A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each."
+        int res = 0;
+        if(citations != null && citations.length > 0) {
+            int len = citations.length;
+            int [] h = new int[len + 1];    //0 - len. That is the range of h index
+            for(int i : citations) {
+                int c = Math.min(i, len);
+                h[c]++;
+            }
+            int pre = 0;
+            for(int i = len; i >= 0; i--) {
+                if(h[i] + pre >= i) {
+                    res = i;
+                    break;
+                }
+                pre += h[i];
+            }
+        }
+        return res;
     }
 }
