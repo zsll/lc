@@ -42,7 +42,7 @@ public class Solution {
                 }
             }
             
-            connect(root.right);
+            connect(root.right);//NoteNote, reverse the order it would be wrong
             connect(root.left);
         }
     }
