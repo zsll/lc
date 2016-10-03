@@ -1,7 +1,9 @@
 public class RandomizedSet {
 
-    HashMap<Integer, Integer> indexToVal = new HashMap<Integer, Integer>();    //key is index, value is value
-    HashMap<Integer, Integer> valToIndex = new HashMap<Integer, Integer>();    //key is val, value is index
+    int size = 0;
+    HashMap<Integer, Integer> vToI = new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> iToV = new HashMap<Integer, Integer>();
+    
     /** Initialize your data structure here. */
     public RandomizedSet() {
         
@@ -9,39 +11,42 @@ public class RandomizedSet {
     
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     public boolean insert(int val) {
-        boolean res = !valToIndex.containsKey(val);
-        if(res) {
-            int size = indexToVal.size();
-            valToIndex.put(val, size);
-            indexToVal.put(size, val);
+        if(vToI.containsKey(val)) {
+            return false;
+        } else {
+            vToI.put(val, size);
+            iToV.put(size, val);
+            size++;
+            return true;
         }
-        return res;
     }
     
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     public boolean remove(int val) {
-        boolean res = valToIndex.containsKey(val);
-        if(res) {
-            int size = indexToVal.size(); 
-            int indexToLeave = valToIndex.get(val);
-            int lastVal = indexToVal.get(size - 1);
-            if(indexToLeave != size - 1) {  //We can move last of that element to the pos of the val to be deleted
-                indexToVal.put(indexToLeave, lastVal);
-                indexToVal.remove(size - 1);
-                valToIndex.put(lastVal, indexToLeave);
+        if(!vToI.containsKey(val)) {
+            return false;
+        } else {
+            int index = vToI.get(val);
+            int valToFill = iToV.get(size - 1);
+            
+            if(index != size - 1) {
+                iToV.remove(size - 1);
+                iToV.put(index, valToFill);
+                vToI.put(valToFill, index);
+                vToI.remove(val);
             } else {
-                indexToVal.remove(indexToLeave);
+                iToV.remove(size - 1);
+                vToI.remove(val);
             }
-            valToIndex.remove(val);
+            size--;
+            return true;
         }
-        return res;
     }
     
     /** Get a random element from the set. */
     public int getRandom() {
         Random r = new Random();
-        int i = r.nextInt(indexToVal.size());
-        return indexToVal.get(i);
+        return iToV.get(r.nextInt(size));
     }
 }
 
