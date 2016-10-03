@@ -24,7 +24,7 @@ Runtime Error Message:
 Line 18: java.lang.ArrayIndexOutOfBoundsException: -1
 Last executed input:
 [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]*/
-                    break;
+                    ;//break;
                 }
                 switch(dir%4) {
                     case 0:
