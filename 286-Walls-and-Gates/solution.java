@@ -1,20 +1,20 @@
 public class Solution {
     public void wallsAndGates(int[][] rooms) {
         if(rooms != null && rooms.length > 0 && rooms[0].length > 0) {
-            int h = rooms.length, w = rooms[0].length;
-            for(int i = 0; i < h; i++) {
-                for(int j = 0; j < w; j++) {
-                    
-                    if(rooms[i][j] == 0) {
-                        bfs(rooms, i, j);
-                    }
-                }
-            }
-        }
-    }
-    
-    void bfs(int[][] rooms, int i, int j) {
-            Queue<Integer> xq = new LinkedList<Integer>();
+	            int h = rooms.length, w = rooms[0].length;
+	            for(int i = 0; i < h; i++) {
+	                for(int j = 0; j < w; j++) {
+	                    
+	                    if(rooms[i][j] == 0) {
+	                        bfs2(rooms, i, j);
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    
+	    void bfs2(int[][] rooms, int i, int j) {
+	            Queue<Integer> xq = new LinkedList<Integer>();
 	            Queue<Integer> yq = new LinkedList<Integer>();
 	            Queue<Integer> preDist = new LinkedList<Integer>();	//You may use level by level traversal, or q queue
 	            xq.offer(i);
@@ -43,8 +43,7 @@ public class Solution {
 	                        v[x][y] = true;
 	                    }
 	                }
-	                dist++;
-            }
-        
-    }
+	            }
+	        
+	    }
 }
