@@ -33,9 +33,9 @@ Special thanks to [@pbrother](https://leetcode.com/pbrother/) for adding this pr
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Google](/company/google/) [Snapchat](/company/snapchat/) [Facebook](/company/facebook/)</span></div>
 
 <div>
 
