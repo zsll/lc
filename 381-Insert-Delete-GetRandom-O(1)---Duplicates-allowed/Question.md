@@ -36,9 +36,9 @@ collection.getRandom();
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Yelp](/company/yelp/)</span></div>
 
 <div>
 
