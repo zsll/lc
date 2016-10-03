@@ -36,7 +36,7 @@ public class Solution {
 	                };
 	                for(int k = 0; k < 4; k++) {
 	                    int x = curX + dir[k][0], y = curY + dir[k][1];
-	                    if(x >= 0 && x < rooms.length && y >= 0 && y < rooms[0].length && !v[x][y] && rooms[x][y] >= 0) {
+	                    if(x >= 0 && x < rooms.length && y >= 0 && y < rooms[0].length && !v[x][y] && rooms[x][y] > 0) {
 	                        xq.offer(x);
 	                        yq.offer(y);
 	                        preDist.offer(dist + 1);
