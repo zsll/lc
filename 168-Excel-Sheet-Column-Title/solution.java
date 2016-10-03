@@ -1,16 +1,15 @@
 public class Solution {
     public String convertToTitle(int n) {
-        StringBuffer res = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         while(n > 0) {
-            int mod = n%26;
-            char c = (char)('A' + mod - 1);
-            if(mod == 0) {
-                c = 'Z';
+            if(n%26 == 0) {
+                sb.insert(0, 'Z');
                 n--;
+            } else {
+                sb.insert(0,(char)(n%26 - 1 + 'A'));
             }
-            res.insert(0, c);
             n /= 26;
         }
-        return res.toString();
+        return sb.toString();
     }
 }
