@@ -14,3 +14,15 @@ Find the sum of all left leaves in a given binary tree.
 
 There are two left leaves in the binary tree, with values **9** and **15** respectively. Return **24**.
 </pre>
+
+<div>
+
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
+
+<span class="hidebutton">[Facebook](/company/facebook/)</span></div>
+
+<div>
+
+<div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
+
+<span class="hidebutton">[Tree](/tag/tree/)</span></div>
