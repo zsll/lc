@@ -16,9 +16,9 @@ What if the inputs contain unicode characters? How would you adapt your solution
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Amazon](/company/amazon/) [Uber](/company/uber/) [Yelp](/company/yelp/)</span></div>
 
 <div>
 
