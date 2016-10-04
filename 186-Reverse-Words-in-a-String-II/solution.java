@@ -5,10 +5,15 @@ public class Solution {
             int start = 0, end = 0;
             while(end < s.length) {
                 start = findStart(s, end);
-                end = findStart(s, start);
+                end = findEnd(s, start);
                 if(end < s.length) {
                    reverse(s, start, end);
-                   start = end + 1;
+                   end++;   //to find next start
+                   /**
+                    * Submission Result: Time Limit Exceeded  More Details 
+
+Last executed input:
+"a b"*/
                 }
             }
         }
