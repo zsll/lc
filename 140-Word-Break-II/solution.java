@@ -1,40 +1,42 @@
 public class Solution {
     public List<String> wordBreak(String s, Set<String> wordDict) {
         List<String> res = new ArrayList<String>();
-        if(wordDict != null && wordDict.size() > 0) {
+        if(s != null && s.length() > 0 && wordDict != null && wordDict.size() > 0) {
             int len = s.length();
-            boolean [] dp = new boolean[len + 1];
-            boolean [][] t = new boolean[len][len]; //t i j means from i to j is a word
-            dp[0] = true;
-            for(int i = 1; i < len + 1; i++) {
-                for(String s1 : wordDict) {
-                    if(i >= s1.length() && dp[i - s1.length()]) {	//NoteNote, substring using i, not i + 1
-                        if(s.substring(i - s1.length(), i).equals(s1)) {
-                            dp[i] = true;
-                            t[i - s1.length()][i - 1] = true;
+            boolean [] t = new boolean[len + 1];
+            t[0] = true;
+            boolean [][] d = new boolean[len][len];
+            for(int i = 1; i <= len; i++) {
+                for(String w : wordDict) {
+                    if(i >= w.length()) {
+                        if(t[i - w.length()] && s.substring(i - w.length(), i).equals(w) ) {
+                            t[i] = true;    //NoteNote we can't break right away
+                            d[i - w.length()][i - 1] = true;
                         }
                     }
                 }
             }
-            if(dp[len]) {
-                StringBuffer sb = new StringBuffer();
-                dfs(t, sb, res, s, 0);
-            }
+            List<String> cur = new ArrayList<String>();
+            dfs(s, d, 0, res, cur);
         }
         return res;
     }
     
-    void dfs(boolean [][] t, StringBuffer sb, List<String> res, String s, int pos) {
-        if(pos == s.length()) {
-            res.add(new String(sb));
+    void dfs(String s, boolean [][] d, int i, List<String> res, List<String> cur) {
+        if(i == s.length() ) {
+            StringBuffer sb = new StringBuffer();
+            for(String c1 : cur) {
+                sb.append(c1);
+                sb.append(" ");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            res.add(sb.toString());
         } else {
-            for(int i = pos; i < s.length(); i++) {
-                if(t[pos][i]) {
-                    String s1 = s.substring(pos, i + 1);
-                    int originalLen = sb.length();
-                    sb.append(pos == 0 ? s1 : " " + s1);
-                    dfs(t, sb, res, s, i + 1);
-                    sb.setLength(originalLen);
+            for(int j = 0; j < s.length(); j++) {
+                if(d[i][j]) {
+                    cur.add(s.substring(i, j + 1));
+                    dfs(s, d, j + 1, res, cur);
+                    cur.remove(cur.size() - 1);
                 }
             }
         }
