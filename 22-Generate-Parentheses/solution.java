@@ -1,42 +1,25 @@
 public class Solution {
     public List<String> generateParenthesis(int n) {
-        ArrayList<String> result = new ArrayList<String>();
-		ArrayList<Integer> remainingLeft = new ArrayList<Integer>();
-		ArrayList<Integer> remainingRight = new ArrayList<Integer>();
-	 
-		result.add("");	//stores result for each step
-		remainingLeft.add(n);	
-		remainingRight.add(n);	
-	 
-		for (int i = 0; i < 2 * n; i++) {//Every time insert one ( or ) and update result and diff
-			ArrayList<String> temp1 = new ArrayList<String>();
-			ArrayList<Integer> temp2 = new ArrayList<Integer>(); 
-			ArrayList<Integer> temp3 = new ArrayList<Integer>(); 
-	 
-			for (int j = 0; j < result.size(); j++) {	//NoteNote the result.size()
-				String s = result.get(j);
-				int l = remainingLeft.get(j);
-				int r = remainingRight.get(j);
-	 
-				if (l - 1 >= 0 ) {
-					temp1.add(s + "(");
-					temp3.add(r);
-					temp2.add(l - 1);
-				}
-	 
-				 
-				if (l <= r-1) {
-					temp1.add(s + ")");
-					temp2.add(l );
-					temp3.add(r  - 1);
-				}
-			}
-	 
-			result = new ArrayList<String>(temp1);	//Please note res is updated 
-			remainingLeft = new ArrayList<Integer>(temp2);
-			remainingRight = new ArrayList<Integer>(temp3);
-		}
-	 
-		return result;
+        List<String> res = new ArrayList<String>();
+        StringBuffer sb = new StringBuffer();
+        dfs(res, sb, n, n);
+        return res;
+    }
+    
+    void dfs(List<String> res, StringBuffer sb, int left, int right) {
+        if(left == 0 && right == 0) {
+            res.add(new String(sb));
+        } else {
+            if(left - 1 >= 0) {
+                sb.append('(');
+                dfs(res, sb, left - 1, right);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            if(right - 1 >= left) {
+                sb.append(')');
+                dfs(res, sb, left, right - 1);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+        }
     }
 }
