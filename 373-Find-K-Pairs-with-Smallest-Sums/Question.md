@@ -43,12 +43,6 @@ Special thanks to [@elmirap](https://leetcode.com/elmirap/) and [@StefanPochmann
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
 <span class="hidebutton">[Google](/company/google/) [Uber](/company/uber/)</span></div>
@@ -58,3 +52,9 @@ Special thanks to [@elmirap](https://leetcode.com/elmirap/) and [@StefanPochmann
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
 <span class="hidebutton">[Heap](/tag/heap/)</span></div>
+
+<div>
+
+<div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
+
+<span class="hidebutton">[(M) Kth Smallest Element in a Sorted Matrix](/problems/kth-smallest-element-in-a-sorted-matrix/)</span></div>
