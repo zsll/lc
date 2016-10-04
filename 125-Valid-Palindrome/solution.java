@@ -16,10 +16,11 @@ public class Solution {
                 ) {
                     res = false;
                     break;
-                } else {
+                } 
+                
                     i++;
                     j--;
-                }
+                
             }
         }
         return res;
