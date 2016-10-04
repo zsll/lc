@@ -7,6 +7,7 @@ public class Solution {
                 res = false;
                 break;
             }
+            s.add(n);
             n = sumDigit(n);
         }
         return res;
