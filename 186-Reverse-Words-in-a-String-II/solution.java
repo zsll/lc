@@ -17,6 +17,8 @@ public class Solution {
             char c = s[start];
             s[start] = s[end];
             s[end] = c;
+            start++;
+            end--;
         }
     }
     
