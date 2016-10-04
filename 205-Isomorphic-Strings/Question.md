@@ -20,9 +20,9 @@ You may assume both **_s_** and **_t_** have the same length.
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[LinkedIn](/company/linkedin/)</span></div>
 
 <div>
 
