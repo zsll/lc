@@ -16,8 +16,10 @@ public class Solution {
                     }
                 }
             }
-            List<String> cur = new ArrayList<String>();
-            dfs(s, d, 0, res, cur);
+            if(t[len]) {
+                List<String> cur = new ArrayList<String>();
+                dfs(s, d, 0, res, cur);
+            }
         }
         return res;
     }
