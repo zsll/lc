@@ -6,8 +6,10 @@ public class Solution {
             while(end < s.length) {
                 start = findStart(s, end);
                 end = findStart(s, start);
-                if(end < s.length)
-                    reverse(s, start, end);
+                if(end < s.length) {
+                   reverse(s, start, end);
+                   start = end + 1;
+                }
             }
         }
     }
