@@ -27,7 +27,7 @@ public class Solution {
                 int c = (int)s.charAt(i);
                 
                     inCnt[c]--;
-                    if(tCnt[c] > 0 && inCnt[c] < tCnt[c]) {
+                    if(tCnt[c] > 0 && inCnt[c] < tCnt[c]) {//NoteNote t[c] > 0, else negative smaller than 0 does not make sense
                         inSize--;
                     }
                 
