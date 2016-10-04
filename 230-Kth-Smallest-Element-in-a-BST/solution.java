@@ -9,28 +9,31 @@
  */
 public class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        int count = 0, res = -1;
+        int res = -1;
         if(root != null) {
             Stack<TreeNode> s = new Stack<TreeNode>();
             s.push(root);
-            boolean pushLeft = true;
+            pushLeft(s);
+            int count = 0;
             while(!s.empty()) {
-                while(pushLeft && s.peek().left != null) {
-                    s.push(s.peek().left);
-                }
-                pushLeft = false;
-                TreeNode c = s.pop();
-                res = c.val;
+                TreeNode cur = s.pop();
                 count++;
                 if(count == k) {
+                    res = cur.val;
                     break;
                 }
-                if(c.right != null) {
-                    s.push(c.right);
-                    pushLeft = true;
+                if(cur.right != null) {
+                    s.push(cur.right);
+                    pushLeft(s);
                 }
             }
         }
         return res;
+    }
+    
+    void pushLeft(Stack<TreeNode> s) {
+        while(s.peek().left != null) {
+            s.push(s.peek().left);
+        }
     }
 }
