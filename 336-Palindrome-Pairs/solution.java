@@ -14,19 +14,35 @@ public class Solution {
 	        return result;
 	    }
 	    public boolean isPalindrome(String word1, String word2) {
-	        String s = word1 + word2;
-	        return isPalindrome(s, 0, s.length() - 1);
+	        int i = 0;
+	        int j = word2.length() - 1;
+	        while (i < word1.length() && j >= 0) {
+	            if (word1.charAt(i) != word2.charAt(j)) {
+	                return false;
+	            }
+	            i += 1;
+	            j -= 1;
+	        }
+	        if (word1.length() < word2.length()) {
+	            i = 0;
+	            while (i < j) {
+	                if (word2.charAt(i) != word2.charAt(j)) {
+	                    return false;
+	                }
+	                i += 1;
+	                j -= 1;
+	            }
+	        } else if (word1.length() > word2.length()) {
+	            j = word1.length() - 1;
+	            while (i < j) {
+	                if (word1.charAt(i) != word1.charAt(j)) {
+	                    return false;
+	                }
+	                i += 1;
+	                j -= 1;
+	            }
+	        }
+	        return true;
 	    }
 	    
-	    boolean isPalindrome(String s, int start, int end) {
-           boolean res = true;
-           while(start < end && s.charAt(start) == s.charAt(end)) {
-               start++;
-               end--;
-           }
-           if(start < end) {
-               res = false;
-           }
-           return res;
-       }
 }
