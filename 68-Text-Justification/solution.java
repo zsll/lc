@@ -16,9 +16,6 @@ public class Solution {
                     for(int k = i; k < j; k++) {
                         sb.append(words[k]);
                         sb.append(" ");
-                        if(lineLength == maxWidth && k == i && j - i > 1) { //Move last space to the pos after first word
-                            sb.append(" ");
-                        } 
                     }
                     sb.deleteCharAt(sb.length() - 1);
                     
