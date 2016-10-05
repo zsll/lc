@@ -12,8 +12,7 @@ public class Solution {
         TreeNode res = null;
         if(q == root || p == root) {
             res = root;
-        }
-        if(root != null) {
+        } else if(root != null) {
             TreeNode l = lowestCommonAncestor(root.left, p, q);
             TreeNode r = lowestCommonAncestor(root.right, p, q);
             if(l != null && r != null) {
