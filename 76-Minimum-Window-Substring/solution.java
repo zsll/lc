@@ -2,7 +2,6 @@ public class Solution {
     public String minWindow(String s, String t) {
         String res = "";
         if(s != null && t != null && t.length() > 0 && s.length() >= t.length()) {
-            res = "";
             int [] tCnt = new int[255];
             for(char c : t.toCharArray()) {
                 tCnt[c]++;
