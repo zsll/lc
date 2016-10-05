@@ -1,39 +1,38 @@
 public class Solution {
     public String minWindow(String s, String t) {
         String res = "";
-        if(!(t == null || s == null || s.length() == 0 || t.length() == 0 || s.length() < t.length())) {
-            int minLen = s.length() + 1, minStart = 0, minEnd = 0, inSize = 0, j = 0;  //minEnd = 0 means invalid
+        if(s != null && t != null && t.length() > 0 && s.length() >= t.length()) {
+            res = "";
             int [] tCnt = new int[255];
-            int [] inCnt = new int[255];
-            for(int i = 0; i < t.length(); i++) {
-                tCnt[t.charAt(i)]++;
+            for(char c : t.toCharArray()) {
+                tCnt[c]++;
             }
+            int [] inWinCnt = new int[255];
+            int j = 0, size = 0;
             for(int i = 0; i < s.length(); i++) {
-                while(inSize < t.length() && j < s.length()) {
-                    int c = (int)s.charAt(j);
-                    
-                        inCnt[c]++;
-                        if(inCnt[c] <= tCnt[c]) {
-                            inSize++;
+                while(j < s.length() && size < t.length()) {
+                    char c = s.charAt(j);
+                    if(tCnt[c] > 0) {
+                        inWinCnt[c]++;
+                        if(inWinCnt[c] <= tCnt[c]) {
+                            size++;
                         }
-                    
+                    }
                     j++;
                 }
-                if(inSize == t.length() && minLen > j - i) {
-                    minLen = j - i;
-                    minStart = i;
-                    minEnd = j;
-                }
-                int c = (int)s.charAt(i);
-                
-                    inCnt[c]--;
-                    if(inCnt[c] < tCnt[c]) {//NoteNote does not need t[c] > 0
-                        inSize--;
+                if(size == t.length()) {
+                    String sub = s.substring(i, j);
+                    if(res.equals("") || sub.length() < res.length()) {
+                        res = sub;
                     }
-                
-            }
-            if(minEnd > 0) {
-                res = s.substring(minStart, minEnd);
+                }
+                char c = s.charAt(i);
+                if(tCnt[c] > 0) {
+                    inWinCnt[c]--;
+                    if(inWinCnt[c] < tCnt[c]) {
+                        size--;
+                    }
+                }
             }
         }
         return res;
