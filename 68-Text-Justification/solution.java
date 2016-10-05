@@ -21,25 +21,24 @@ public class Solution {
                         } 
                     }
                     sb.deleteCharAt(sb.length() - 1);
-                    res.add(sb.toString());
-                    break;
+                    
                 } else if(lineLength == maxWidth + 1) {
                     for(int k = i; k < j; k++) {
                         sb.append(words[k]);
                         sb.append(" ");
                     }
                     sb.deleteCharAt(sb.length() - 1);
-                    res.add(sb.toString());
                 } else {
                     wordCount--;
+                    j--;
+                    lineLength -= (words[j].length() + 2);  //actual length
                     if(wordCount == 1) {
-                        res.add(words[i]);
+                        sb.append(words[i]);
                     } else {
-                        
-                        j--;
-                        lineLength -= (words[j].length() + 2);  //actual length
-                        int spaceNum = (maxWidth - lineLength)/(wordCount - 1); //Minimum spaces
-                        int firstExtraSpace = (maxWidth - lineLength) - spaceNum*(wordCount - 1);   //First spaces that needs one more
+                     int wordLengthWithoutSpace = lineLength - (wordCount - 1);
+                    int spaceNum = (maxWidth - wordLengthWithoutSpace)/(wordCount - 1); //Minimum spaces
+                    int firstExtraSpace = (maxWidth - wordLengthWithoutSpace) - spaceNum*(wordCount - 1);   //First spaces that needs one more
+
                         for(int k = i; k < j; k++) {
                             sb.append(words[k]);
                             if(k == j - 1){
@@ -52,9 +51,24 @@ public class Solution {
                                 sb.append(" ");
                             }
                         }
-                        res.add(sb.toString());
                     }
                 }
+                
+                    /*Needs to fill rest with spaces
+                    Submission Result: Wrong Answer More Details 
+
+Input:
+[""]
+2
+Output:
+[""]
+Expected:
+["  "]
+                    */
+                while(sb.length() < maxWidth) {
+                    sb.append(" ");
+                }
+                res.add(sb.toString());
                 i = j;
             }
         } 
