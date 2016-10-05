@@ -9,12 +9,6 @@ the contiguous subarray `[2,3]` has the largest product = `6`.
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
 <span class="hidebutton">[LinkedIn](/company/linkedin/)</span></div>
