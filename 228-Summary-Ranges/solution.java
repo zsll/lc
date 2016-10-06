@@ -1,25 +1,25 @@
 public class Solution {
-    public List<String> summaryRanges(int[] a) {
+    public List<String> summaryRanges(int[] nums) {
         List<String> res = new ArrayList<String>();
-        if(a != null && a.length > 0) {
-            int s = 0;
-            int i = 0;
-            for(i = 1; i < a.length; i++) {
-                if(a[i] > a[i - 1] + 1) {
-                    res.add(generateS(a[s], a[i - 1]));
-                    s = i;
+        if(nums != null && nums.length > 0) {
+            int start = nums[0], end = nums[0] - 1;
+            for(int i : nums) {
+                if(end < i - 1) {
+                    res.add(getS(start, end));
+                    start = i;
                 }
+                end = i;
             }
-            res.add(generateS(a[s], a[i - 1]));
+            res.add(getS(start, end));
         }
         return res;
     }
     
-    String generateS(int a, int b) {
-        if(a == b) {
-            return Integer.toString(a);
+    String getS(long start, long end) {
+        if(start == end) {
+            return Long.toString(start);
         } else {
-            return a + "->" + b;
+            return start + "->" + end;
         }
     }
 }
