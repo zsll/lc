@@ -8,6 +8,7 @@ public class Solution {
                 int j = 1;
                 while(j*j <= i) {
                     t[i] = Math.min(t[i], 1 + t[i - j*j]);
+                    j++;
                 }
             }
             res = t[n];
