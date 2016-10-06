@@ -28,51 +28,54 @@
  */
 public class Solution {
     public NestedInteger deserialize(String s) {
-         NestedInteger res = null;
+        NestedInteger res = null;
         if(s != null && s.length() > 0) {
             Stack<NestedInteger> stack = new Stack<NestedInteger>();
-            //Create new NestedInteger when 1. start of number, hitting a '['
-            boolean prevCharIsNumber = false;
+            int num = 0;
             boolean isNeg = false;
-            NestedInteger cur = null;
-            for(char c : s.toCharArray()) {
-                if (c >= '0' && c <= '9' || c == '-'){
-                    int prev = 0;
-                    if(!prevCharIsNumber) {
-                        cur = new NestedInteger(0);
-                        if(res == null) {
-                        	res = cur;
-                        } else {
-                            stack.peek().getList().add(cur);
-                        }
-                    } else { //NoteNote
-                        prev = cur.getInteger();
-                    }
-                    if(c == '-') {
-                        isNeg = true;
-                    } else {
-                        if(isNeg) {
-                            cur.setInteger((int)(prev * 10 - (c - '0')));
-                        } else {
-                            cur.setInteger((int)(prev * 10 + (c - '0')));
-                        }
-                    }
-                    prevCharIsNumber = true;
+            for(int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if( c == '-') {
+                    isNeg = true;
+                } if (c >= '0' && c <= '9') {
+                    num = isNeg ? num * 10 - (c - '0') : num * 10 + c - '0';
                 } else {
-                    isNeg = false;
-                    prevCharIsNumber = false;
-                    if(c == '[') {
-                        cur = new NestedInteger();
+                    if(i > 0 && s.charAt(i - 1) >= '0' && s.charAt(i - 1) <= '9') {
+                        NestedInteger n = new NestedInteger(num);
                         if(res == null) {
-                        	res = cur;
-                        } else {
-                            stack.peek().getList().add(cur);
+                            res = n;
                         }
-                        stack.push(cur);
+                        if(!stack.empty()) {
+                            stack.peek().getList().add(n);
+                        }
+                        num = 0;
+                        isNeg = false;
+                    }
+                    if(c == '[') {
+                        
+                        NestedInteger n = new NestedInteger();
+                        if(res == null) {
+                            res = n;
+                        }
+                        if(!stack.empty()) {
+                            stack.peek().getList().add(n);
+                        }
+                        stack.push(n);
                     } else if(c == ']') {
-                        stack.pop();//last popped one would definitely be result
+                        stack.pop();
                     }
                 }
+            }
+            if(num != 0) {
+                /**
+                 * Submission Result: Runtime Error More Details 
+
+Last executed input:
+"324"*/
+NestedInteger n = new NestedInteger(num);
+                        if(res == null) {
+                            res = n;
+                        }
             }
         }
         return res;
