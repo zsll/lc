@@ -22,9 +22,9 @@ Special thanks to [@ts](https://leetcode.com/discuss/user/ts) for adding this pr
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Airbnb](/company/airbnb/)</span></div>
 
 <div>
 
