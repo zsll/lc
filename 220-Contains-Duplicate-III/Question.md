@@ -6,9 +6,9 @@ Given an array of integers, find out whether there are two distinct indices _i_ 
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Palantir](/company/palantir/) [Airbnb](/company/airbnb/)</span></div>
 
 <div>
 
