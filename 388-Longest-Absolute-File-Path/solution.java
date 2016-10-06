@@ -2,55 +2,42 @@ public class Solution {
     public int lengthLongestPath(String input) {
         int res = 0;
         if(input != null && input.length() > 0) {
-            String [] strs = input.split("\n");    //NoteNote this is different from /d or /., /+ /*, does not have to escape, since it's one char
-            Stack<LevelString> stack = new Stack<LevelString>();
-            for(String s : strs) {
-                int level = getLevel(s);
-                while(!stack.empty() && stack.peek().level >= level) {
-                    stack.pop();
+            String [] lines = input.split("\\n");
+            Stack<String> dirStack = new Stack<String>();
+            Stack<Integer> spaceStack = new Stack<Integer>();
+            int curDirLen = 0;
+            for(String line : lines) {
+                int spaces = spaceCount(line);
+                String s = line.substring(spaces);
+                
+                    while(!spaceStack.empty() && spaces <=  spaceStack.peek()) {
+                        spaceStack.pop();
+                        String popped = dirStack.pop();
+                        curDirLen -= (popped.length() + 1); //NoteNote there is a '\' between folders
+                    }
+                if(s.indexOf(".") >= 0) {
+                    res = Math.max(curDirLen + s.length(), res);
+                } else {
+                    curDirLen += (s.length() + 1);
+                    spaceStack.push(spaces);
+                    dirStack.push(s);
                 }
-                /*String curPath = s.trim();Submission Result: Wrong Answer More Details 
-                NoteNote, can't do trim for file name might start with spaces (WTF)
-
-Input:
-"dir\n        file.txt"
-Output:
-12
-Expected:
-16
-*/
-                String curPath = s.substring(level);
-                boolean isFile = false;
-                if(curPath.split("\\.").length >= 2) {  //is file
-                    isFile = true;
-                }
-                if(!stack.empty()) {
-                   curPath = stack.peek().s + "/" + curPath;
-                }
-                if(curPath.length() > res && isFile) {
-                    res = curPath.length();
-                }
-                LevelString cur = new LevelString(level, curPath);
-                stack.push(cur);
             }
         }
         return res;
     }
-    
-    int getLevel(String s) {
-        int res = 0;
-        while(res < s.length() && s.charAt(res) == '\t') {
-            res++;
+    //Find first non space char, which would be the starting space numbers, binary search to find
+    int spaceCount(String line) {
+        int start = 0, end = line.length() - 1;
+        while(start <= end) {
+            int mid = start + (end - start >> 1);
+            if(line.charAt(mid) != '\t') {   //NoteNote
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+            
         }
-        return res;
-    }
-    
-    class LevelString { //Stores 1. how many \t are in front, called level 2. cur string
-        int level;
-        String s;
-        public LevelString(int level, String s) {
-            this.level = level;
-            this.s = s;
-        }
+        return start;
     }
 }
