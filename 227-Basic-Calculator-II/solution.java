@@ -1,38 +1,38 @@
 public class Solution {
-    public int calculate(String s1) {
-            int res = 0;
-    if(s1 != null && s1.length() > 0) {
-    	String newS = s1.replace(" ", "");
-        String [] num = newS.split("[\\+\\-\\*/]");
-        String [] operators = newS.split("[0-9]+");
-        LinkedList<String> s = new LinkedList<String>();
-        s.add(num[0].trim());
-        for(int i = 1; i < operators.length; i++) {
-            if(operators[i].trim().equals("+") || operators[i].trim().equals("-")) {
-                s.add(operators[i].trim());
-                s.add(num[i].trim());
-            } else if(operators[i].trim().equals("*") || operators[i].trim().equals("/")) {
-                int a = Integer.parseInt(s.removeLast());
-                int b = Integer.parseInt(num[i].trim());
-                if(operators[i].trim().equals("*")) {
-                    s.add(Integer.toString(a * b));
+    public int calculate(String s) {
+        long res = 0;
+        if(s != null && s.length() > 0) {
+            s = s.replaceAll("\\s", "");
+            String [] number = s.split("[\\+\\-\\*/]");
+            String [] signs = s.split("[0-9]+");
+            LinkedList<Long> stack = new LinkedList<Long>();
+            stack.push(Long.parseLong(number[0]));
+            for(int i = 1; i < signs.length; i++) {
+                String sign = signs[i];
+                if(sign.equals("*") || sign.equals("/")) {
+                    long pre = stack.removeLast();
+                    if(sign.equals("*") ) {
+                        stack.add(pre*Long.parseLong(number[i]));
+                    } else {
+                        stack.add(pre/Long.parseLong(number[i]));
+                    }
                 } else {
-                    s.add(Integer.toString(a / b));
+                    stack.add(Long.parseLong(number[i]));
                 }
             }
-        }
-        while(s.size() > 1) {
-            int a = Integer.parseInt(s.remove());
-            String oper = s.remove();
-            int b = Integer.parseInt(s.remove());
-            if(oper.equals("+")) {
-                    s.add(0, Integer.toString(a + b));
-                } else {
-                    s.add(0, Integer.toString(a - b));
+            for(int i = 0; i < signs.length; i++) {
+                String sign = signs[i];
+                if(sign.equals("+") || sign.equals("-")) {
+                    long first = stack.remove(), sec = stack.remove();
+                    if(sign.equals("+") ) {
+                        stack.push(first + sec);
+                    } else {
+                        stack.push(first - sec);
+                    }
                 }
+            }
+            res = stack.peek();
         }
-        res = Integer.parseInt(s.get(0));
-    }
-    return res;
+        return (int)res;
     }
 }
