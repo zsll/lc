@@ -86,27 +86,29 @@ public class NumMatrix {
 	            }
 	            
 	            public void update(int val, int x, int y) {
-	                if(this.top == this.bottom && this.bottom == y && this.left == this.right && this.left == x) {
-	                    this.sum = val;
-	                } else if(x >= left && x <= right && y >= bottom && y <= top){//Without this condition, it will overwrite previous result
-	                    this.sum = 0;
-	                    if(lt != null) {
-	                        this.lt.update(val, x, y);
-	                        this.sum += lt.sum;
-	                    }
-	                    if(rt != null) {
-	                        this.rt.update(val, x, y);
-	                        this.sum += rt.sum;
-	                    }
-	                    if(lb != null) {
-	                        this.lb.update(val, x, y);
-	                        this.sum += lb.sum;
-	                    }
-	                    if(rb != null) {
-	                        this.rb.update(val, x, y);
-	                        this.sum += rb.sum;
-	                    }
-	                    
+	                if(x >= left && x <= right && y >= bottom && y <= top) {
+    	                if(this.top == this.bottom && this.bottom == y && this.left == this.right && this.left == x) {
+    	                    this.sum = val;
+    	                } else {//Without this condition, it will overwrite previous result
+    	                    this.sum = 0;
+    	                    if(lt != null) {
+    	                        this.lt.update(val, x, y);
+    	                        this.sum += lt.sum;
+    	                    }
+    	                    if(rt != null) {
+    	                        this.rt.update(val, x, y);
+    	                        this.sum += rt.sum;
+    	                    }
+    	                    if(lb != null) {
+    	                        this.lb.update(val, x, y);
+    	                        this.sum += lb.sum;
+    	                    }
+    	                    if(rb != null) {
+    	                        this.rb.update(val, x, y);
+    	                        this.sum += rb.sum;
+    	                    }
+    	                    
+    	                }
 	                }
 	            }
 	        }
