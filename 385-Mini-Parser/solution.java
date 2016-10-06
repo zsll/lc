@@ -45,7 +45,8 @@ public class Solution {
                         if(res == null) {
                             res = n;
                         }
-                        if(!stack.empty()) {
+                        //if(!stack.empty()) {
+                        else {
                             stack.peek().getList().add(n);
                         }
                         num = 0;
@@ -57,7 +58,8 @@ public class Solution {
                         if(res == null) {
                             res = n;
                         }
-                        if(!stack.empty()) {
+                        //if(!stack.empty()) {
+                        else {
                             stack.peek().getList().add(n);
                         }
                         stack.push(n);
