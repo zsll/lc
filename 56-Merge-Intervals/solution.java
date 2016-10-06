@@ -12,30 +12,21 @@ public class Solution {
         List<Interval> res = new ArrayList<Interval>();
         if(intervals != null && intervals.size() > 0) {
             Collections.sort(intervals, new Comparator<Interval>() {
-                public int compare(Interval a, Interval b) {
-                    return a.start - b.start;
-                }
+               public int compare(Interval a, Interval b) {
+                   return a.start - b.start;
+               } 
             });
-            Interval pre = intervals.get(0);
+            Interval m = intervals.get(0);
             for(int i = 1; i < intervals.size(); i++) {
-                Interval cur = intervals.get(i);
-                if(pre.end < cur.start) {
-                    res.add(pre);
-                    pre = cur;
+                Interval n = intervals.get(i);
+                if(m.end < n.start) {
+                    res.add(m);
+                    m = n;
                 } else {
-                    /*
-                    Submission Result: Wrong Answer More Details 
-
-Input:
-[[1,4],[2,3]]
-Output:
-[[1,3]]
-Expected:
-[[1,4]]*/
-                    pre.end = Math.max(pre.end,cur.end);
+                    m.end = Math.max(m.end, n.end);
                 }
             }
-            res.add(pre);
+            res.add(m);
         }
         return res;
     }
