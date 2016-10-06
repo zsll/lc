@@ -2,7 +2,7 @@ public class Solution {
     public int calculate(String s) {
         long res = 0;
         if(s != null && s.length() > 0) {
-            s = s.replaceAll("\\s", "");
+            s = s.replaceAll(" ", "");
             String [] number = s.split("[\\+\\-\\*/]");
             String [] signs = s.split("[0-9]+");
             LinkedList<Long> stack = new LinkedList<Long>();
