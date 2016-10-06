@@ -75,9 +75,9 @@ public class Solution {
 Last executed input:
 "324"*/
 NestedInteger n = new NestedInteger(num);
-                        if(res == null) {
+                        //if(res == null) {
                             res = n;
-                        }
+                        //}
             }
         }
         return res;
