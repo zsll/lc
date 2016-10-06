@@ -66,7 +66,7 @@ public class Solution {
                     }
                 }
             }
-            if(num != 0) {
+            if(s.charAt(s.length() - 1) >= '0' && s.charAt(s.length() - 1) <= '9') {
                 /**
                  * Submission Result: Runtime Error More Details 
 
