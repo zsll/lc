@@ -1,48 +1,54 @@
 public class Solution {
  	    public List<List<Integer>> palindromePairs(String[] words) {
-	        List<List<Integer>> result = new ArrayList<List<Integer>>();
-	        for (int i = 0; i < words.length; i++) {
-	            for (int j = 0; j < words.length; j++) {
-	                if (i != j && isPalindrome(words[i], words[j])) {
-	                    List<Integer> item = new ArrayList<Integer>();
-	                    item.add(i);
-	                    item.add(j);
-	                    result.add(item);
-	                }
+	        List<List<Integer>> res = new ArrayList<List<Integer>>();
+	        if(words != null && words.length > 1) {
+	            HashMap<String, Integer> sToI = new HashMap<String, Integer>();
+	            for(int i = 0; i < words.length; i++) {
+	                sToI.put(words[i], i);
+	            }
+	            HashSet<List<Integer>> v = new HashSet<List<Integer>>();
+	            for(int i = 0; i < words.length; i++) {
+	                String w = words[i];
+	                for(int firstLen = 0; firstLen <= w.length(); firstLen++) {
+	                    String firstHalf = w.substring(0, firstLen), secondHalf = w.substring(firstLen, w.length());
+	                    if(isPalindrom(firstHalf)) {
+	                        StringBuffer sb = new StringBuffer(secondHalf);
+	                        String secondHalfRev = sb.reverse().toString();
+	                        if(sToI.containsKey(secondHalfRev) && sToI.get(secondHalfRev) != i) {
+	                            List<Integer> l = new ArrayList<Integer>();
+	                            l.add(sToI.get(secondHalfRev));
+	                            l.add(i);
+	                            if(!v.contains(l)) {
+	                                res.add(l);
+	                                v.add(l);
+	                            }
+	                        }
+	                    }
+	                    if(isPalindrom(secondHalf)) {
+	                        StringBuffer sb = new StringBuffer(firstHalf);
+	                        String firstHalfRev = sb.reverse().toString();
+	                        if(sToI.containsKey(firstHalfRev) && sToI.get(firstHalfRev) != i) {
+	                            List<Integer> l = new ArrayList<Integer>();
+	                            l.add(i);
+	                            l.add(sToI.get(firstHalfRev));
+	                            if(!v.contains(l)) {
+	                                res.add(l);
+	                                v.add(l);
+	                            }
+	                        }
+	                    }
+	                } 
 	            }
 	        }
-	        return result;
-	    }
-	    public boolean isPalindrome(String word1, String word2) {
-	        int i = 0;
-	        int j = word2.length() - 1;
-	        while (i < word1.length() && j >= 0) {
-	            if (word1.charAt(i) != word2.charAt(j)) {
-	                return false;
-	            }
-	            i += 1;
-	            j -= 1;
-	        }
-	        if (word1.length() < word2.length()) {
-	            i = 0;
-	            while (i < j) {
-	                if (word2.charAt(i) != word2.charAt(j)) {
-	                    return false;
-	                }
-	                i += 1;
-	                j -= 1;
-	            }
-	        } else if (word1.length() > word2.length()) {
-	            j = word1.length() - 1;
-	            while (i < j) {
-	                if (word1.charAt(i) != word1.charAt(j)) {
-	                    return false;
-	                }
-	                i += 1;
-	                j -= 1;
-	            }
-	        }
-	        return true;
+	        return res;
 	    }
 	    
+	    boolean isPalindrom(String s) {
+	        int start = 0, end = s.length() - 1;
+	        while(start < end && s.charAt(start) == s.charAt(end)) {
+	            start++;
+	            end--;
+	        }
+	        return start >= end;
+	    }
 }
