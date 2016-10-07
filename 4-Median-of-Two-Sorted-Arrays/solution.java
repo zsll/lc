@@ -1,67 +1,62 @@
 public class Solution {
-    public double findMedianSortedArrays(int[] a, int[] b) {
-        int aL = a != null? a.length : 0;
-    	int bL = b != null? b.length :0;
-    	if((aL + bL)%2 > 0) {
-    		return kthSmallestSum(a, b, (aL + bL)/2 + 1);
-    	} else {
-    		int t1 = kthSmallestSum(a, b, (aL + bL)/2 );
-    		int t2 = kthSmallestSum(a, b, (aL + bL)/2 + 1);
-    		return (double)(t1 + t2)/2;//NoteNote convert
-    	}
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        double res = 0;
+        if(nums1 != null && nums2 != null) {
+            /**
+             * Len might be 0
+             * Submission Result: Wrong Answer More Details 
+
+Input:
+[]
+[1]
+Output:
+0.00000
+Expected:
+1.00000*/
+            int total = nums1.length + nums2.length;
+            res = find(nums1, nums2, 0, nums1.length - 1, 0, nums2.length -1, total/2 + 1);
+            if(total%2 == 0) {
+                double res1 = find(nums1, nums2, 0, nums1.length - 1, 0, nums2.length -1, total/2);
+                res = (res + res1)/2;
+            }
+        }
+        return res;
     }
     
-    
-    public int kthSmallestSum(int[] A, int[] B, int k) {
-        // Write your code here
-    	int result = 0;
-    	if(A != null && B != null && A.length + B.length >= 0 && k <= A.length + B.length) {
-    		result = kthSmallestSumHelper(A, B, k, 0, A.length - 1, 0, B.length - 1);
-    	}
-    	return result;
-    }
-    
-    public int kthSmallestSumHelper(int[] a, int[] b, int k, int aStart, int aEnd, int bStart, int bEnd) {
-        // Write your code here
-    	if(aStart > aEnd) {
-    		return b[bStart + k - 1];
-    	}
-    	if(bStart > bEnd) {
-    		return a[aStart + k - 1];
-    	}
-    	int aMid = (aEnd - aStart)/2 + aStart;
-    	int bMid = (bEnd - bStart)/2 + bStart;
-    	
-    	int firstHalfLen = (aMid - aStart + 1) + (bMid - bStart + 1);
-    	
-    	if(k == 1) {
-    	    return Math.min(a[aStart], b[bStart]);
-    	}
-    	
-    	if (k == firstHalfLen) {
-    		if(a[aMid] == b[bMid]) {
-    			return a[aMid];
-    		} else if(a[aMid] > b[bMid]) {
-    			return kthSmallestSumHelper(a, b, k - (bMid - bStart + 1 ), aStart, aMid, bMid + 1, bEnd);
-    		} else {
-    			return kthSmallestSumHelper(a, b, k - (aMid - aStart + 1 ), aMid + 1, aEnd, bStart, bMid);
-    		}
-    	} else if(k < firstHalfLen) {
-    		if(a[aMid] == b[bMid]) {
-    			return kthSmallestSumHelper(a, b, k, aStart, aMid - 1, bStart, bMid - 1);
-    		} else if(a[aMid] > b[bMid]) {
-    			return kthSmallestSumHelper(a, b, k, aStart, aMid - 1, bStart, bEnd);
-    		} else {
-    			return kthSmallestSumHelper(a, b, k, aStart, aEnd, bStart, bMid - 1);
-    		}	
-    	} else {
-    		if(a[aMid] == b[bMid]) {
-    			return kthSmallestSumHelper(a, b, k - firstHalfLen, aMid + 1, aEnd, bMid + 1, bEnd);
-    		} else if(a[aMid] > b[bMid]) {
-    			return kthSmallestSumHelper(a, b, k - (bMid - bStart + 1), aStart, aEnd, bMid + 1, bEnd);
-    		} else {
-    			return kthSmallestSumHelper(a, b, k - (aMid - aStart + 1), aMid + 1, aEnd, bStart, bEnd);
-    		}
-    	}
+    public double find(int [] nums1, int [] nums2, int start1, int end1, int start2, int end2, int k) {
+        if(start1 > end1) {
+            return nums2[start2 + k - 1];
+        }
+        if(start2 > end2) {
+            return nums1[start1 + k - 1];
+        }
+        int mid1 = (end1 + start1)/2, mid2 = (end2 + start2)/2;
+        int first1 = mid1 - start1 + 1, first2 = mid2 - start2 + 1;
+        int firstHalfLen = first1 + first2;
+        if(first1 + first2 == k) {
+            if(nums1[mid1] == nums2[mid2]) {
+                return nums1[mid1];
+            } else if(nums1[mid1] > nums2[mid2]) {
+                return find(nums1, nums2, start1, end1, mid2 + 1, end2, k - first2);
+            } else {
+                return find(nums1, nums2, mid1 + 1, end1, start2, end2, k - first1);
+            }
+        } else if (first1 + first2 < k) {
+            if(nums1[mid1] == nums2[mid2]) {
+                return find(nums1, nums2, mid1 + 1, end1, mid2 + 1, end2, k - first2 - first1);
+            } else if(nums1[mid1] > nums2[mid2]) {
+                return find(nums1, nums2, start1, end1, mid2 + 1, end2, k - first2);
+            } else {
+                return find(nums1, nums2, mid1 + 1, end1, start2, end2, k - first1);
+            }
+        } else {
+            if(nums1[mid1] == nums2[mid2]) {
+                return find(nums1, nums2, start1, end1 - 1, start2, mid2 - 1, k);
+            } else if(nums1[mid1] > nums2[mid2]) {
+                return find(nums1, nums2, start1, mid1 - 1, start2, end2, k);
+            } else {
+                return find(nums1, nums2, start1, end1, start2, mid2 - 1, k);
+            }
+        }
     }
 }
