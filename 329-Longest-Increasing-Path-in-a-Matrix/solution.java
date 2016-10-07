@@ -1,29 +1,34 @@
 public class Solution {
     public int longestIncreasingPath(int[][] matrix) {
-        if (matrix.length == 0) return 0;
-        int m = matrix.length, n = matrix[0].length;
-        int[][] dis = new int [m][n];
-        int ans = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                ans = Math.max(ans, dfs( i, j, m, n, matrix, dis));
+        int res = 0;
+        if(matrix != null && matrix.length > 0 && matrix[0].length > 0) {
+            int h = matrix.length, w = matrix[0].length;
+            int [][] dp = new int[h][w];
+            for(int i = 0; i < h; i++) {
+                for(int j = 0; j < w; j++) {
+                    res = Math.max(res, dfs(dp, matrix, i, j));
+                }
             }
         }
-        return ans;
+        return res;
     }
     
-    int[] dx = {1, 0, -1, 0}, dy = {0, 1, 0, -1};
- 
-    int dfs(int x, int y, int m,int n,int[][] matrix, int[][] dis) {
-        if (dis[x][y] != 0) return dis[x][y];
- 
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx >= 0 && ny >= 0 && nx < m && ny < n && matrix[nx][ny] > matrix[x][y]) {
-                dis[x][y] = Math.max(dis[x][y], dfs(nx, ny, m, n, matrix, dis));
+    int dfs(int [][] dp, int[][] matrix, int i, int j) {
+        if(dp[i][j] == 0) {
+            int [][] dir = {
+                {0, 1},
+                {1, 0},
+                {-1, 0},
+                {0, -1}
+            };
+            dp[i][j] = 1;//NoteNote
+            for(int k = 0; k < 4; k++) {
+                int x = i + dir[k][0], y = dir[k][1] + j;
+                if(x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] > matrix[i][j]) {
+                    dp[i][j] = Math.max(dp[i][j], 1 + dfs(dp,matrix,x,y));
+                }
             }
         }
-        return ++dis[x][y];
+        return dp[i][j];
     }
 }
