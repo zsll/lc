@@ -32,4 +32,4 @@ Return the array `[2, 1, 1, 0]`.
 
 <div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton">[(H) Count of Range Sum](/problems/count-of-range-sum/)</span></div>
+<span class="hidebutton">[(H) Count of Range Sum](/problems/count-of-range-sum/) [(M) Queue Reconstruction by Height](/problems/queue-reconstruction-by-height/)</span></div>
