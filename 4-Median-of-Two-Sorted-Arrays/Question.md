@@ -24,15 +24,9 @@ The median is (2 + 3)/2 = 2.5
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Adobe](/company/adobe/) [Apple](/company/apple/) [Dropbox](/company/dropbox/) [Google](/company/google/) [Microsoft](/company/microsoft/) [Yahoo](/company/yahoo/) [Zenefits](/company/zenefits/)</span></div>
+<span class="hidebutton">[Google](/company/google/) [Zenefits](/company/zenefits/) [Microsoft](/company/microsoft/) [Apple](/company/apple/) [Yahoo](/company/yahoo/) [Dropbox](/company/dropbox/) [Adobe](/company/adobe/)</span></div>
 
 <div>
 
