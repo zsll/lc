@@ -26,6 +26,7 @@ public class Codec {
                 }
                 sb.append(",");
             }
+            sb.setLength(sb.length() - 1);
         }
         return sb.toString();
     }
@@ -33,26 +34,25 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         TreeNode res = null;
-        if(data.length() > 0) {
-            String [] val = data.split(",");
-            int len = val.length;
-            TreeNode [] a = new TreeNode[len];
-            for(int i = 0; i < len; i++) {
-                a[i] = null;
-                if(!val[i].equals("#")) {
-                    a[i] = new TreeNode(Integer.parseInt(val[i]));
+        if(data != null && data.length() > 0) {
+            String [] a = data.split(",");
+            TreeNode [] t = new TreeNode[a.length];
+            for(int i = 0; i < a.length; i++) {
+                String v = a[i];
+                if(!v.equals("#")) {
+                    t[i] = new TreeNode(Integer.parseInt(v));
                 }
             }
             int preNull = 0;
-            res = a[0];
-            for(int i = 0; i < len; i++) {
-                if(a[i] == null) {
+            for(int i = 0; i < t.length; i++) {
+                if(t[i] == null) {
                     preNull++;
                 } else {
-                    a[i].left = a[i*2 + 1 - 2*preNull];
-                    a[i].right = a[i*2 + 2 - 2*preNull];
+                    t[i].left = t[i * 2 + 1 - 2*preNull];
+                    t[i].right = t[i * 2 + 2 - 2*preNull];
                 }
             }
+            res = t[0];
         }
         return res;
     }
