@@ -9,6 +9,7 @@ public class Solution {
                 if(i%2 > 0 && nums[i] < nums[i + 1]) {
                     swap(nums, i, i + 1);
                 }
+                i++;
             }
         }
     }
