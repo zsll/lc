@@ -1,11 +1,11 @@
 public class Solution {
     
     public void gameOfLife(int[][] board) {
-        final int alive_to_dead = 1;
-        final int alive_to_alive = 3;
-        final int dead_to_alive = 0;
+        final int alive_to_dead = 1;//0 <- 1
+        final int alive_to_alive = 3;   //1 <- 1
+        final int dead_to_alive = 0;//
         final int dead_to_dead = 2;
-        int [][] directions = {
+        int [][] dir = {
             {0, 1},
             {1, 0},
             {0, -1},
@@ -15,41 +15,34 @@ public class Solution {
             {-1, 1},
             {-1, -1}
         };
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[0].length; j++) {
+        int h = board.length, w = board[0].length;
+        for(int i = 0; i < h; i++) {
+            for(int j = 0; j < w; j++) {
                 int live = 0;
                 for(int k = 0; k < 8; k++) {
-                    int x = i + directions[k][0], y = j + directions[k][1];
-                    if(x >= 0 && x < board.length && y >= 0 && y < board[0].length) {
-                        if(board[x][y]%2 == 1) {
+                    int x = i + dir[k][0], y = j + dir[k][1];
+                    if(x >= 0 && x < h && y >= 0 && y < w) {
+                        if(board[x][y]%2 > 0) {
                             live++;
-                        } 
-                        
-                        
+                        }
                     }
                 }
+                int newState = 0;   //dead
                 if(board[i][j] == 1) {
-                    if(live < 2 || live > 3) {
-                        board[i][j] =  alive_to_dead;
-                    } else {
-                        board[i][j] =  alive_to_alive;
-                    } 
+                    if(live >= 2 && live <=3) {
+                        newState = 1;
+                    }
                 } else {
                     if(live == 3) {
-                        board[i][j] = dead_to_alive;
-                    } else {
-                        board[i][j] = dead_to_dead;
+                        newState = 1;
                     }
                 }
+                board[i][j] =  ((newState << 1) | board[i][j]);
             }
         }
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
-                if(board[i][j] == 3 || board[i][j] == 0) {
-                    board[i][j] = 1;
-                } else {
-                    board[i][j] = 0;
-                }
+                board[i][j] = board[i][j]>>1;
             }
         }
     }
