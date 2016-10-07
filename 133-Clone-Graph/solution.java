@@ -8,22 +8,24 @@
  */
 public class Solution {
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        UndirectedGraphNode res = node;
+        UndirectedGraphNode res = null;
         if(node != null) {
-            res = new UndirectedGraphNode(node.label);
-            HashMap<UndirectedGraphNode, UndirectedGraphNode> m = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
-            m.put(node, res);
+            HashMap<UndirectedGraphNode, UndirectedGraphNode> h = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
             Queue<UndirectedGraphNode> q = new LinkedList<UndirectedGraphNode>();
-            q.offer(node);
+            res = new UndirectedGraphNode(node.label);
+            h.put(node, res);
+            q.offer(node); 
             while(!q.isEmpty()) {
                 UndirectedGraphNode cur = q.poll();
                 for(UndirectedGraphNode n : cur.neighbors) {
-                    if(!m.containsKey(n)) {
-                        UndirectedGraphNode nClone = new UndirectedGraphNode(n.label);
-                        m.put(n, nClone);
+                    if(h.containsKey(n)) {
+                        h.get(cur).neighbors.add(h.get(n));
+                    } else {
+                        UndirectedGraphNode newN = new UndirectedGraphNode(n.label);
+                        h.get(cur).neighbors.add(newN);
+                        h.put(n, newN);
                         q.offer(n);
                     }
-                    m.get(cur).neighbors.add(m.get(n));
                 }
             }
         }
