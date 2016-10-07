@@ -23,9 +23,9 @@ Special thanks to [@jianchao.li.fighter](https://leetcode.com/discuss/user/jianc
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Dropbox](/company/dropbox/) [Google](/company/google/) [Snapchat](/company/snapchat/)</span></div>
 
 <div>
 
