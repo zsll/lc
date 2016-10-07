@@ -17,7 +17,6 @@ public class Solution {
                         }
                     }
                 } else {
-                    dp[0][j] = dp[0][j - 1];
                     int k = 0;
                     while(k <= sLen && !dp[k][j - 1]) {
                         k++;
