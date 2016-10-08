@@ -1,24 +1,20 @@
 public class Solution {
-    /*n位数的个数： 1位数有9， 2位99 - 9 = 90； 3位900 ... 4
-    
-    */
+    //There are 9 1 digit number, 90 2 digits ..., so 
     public int findNthDigit(int n) {
-        long sum = 0, i = 1, base = 9;
-        int pre = 0; //i是位数
+        long base  = 1, sum = 0, digit = 1, pre = 0;
         while(sum < n) {
-            sum += base*i;
-            i++;
-            pre += base;    //9 99 999
-            base*=10;
+            sum += digit*base*9;
+            pre += base*9;
+            base *=10;
+            digit++;
         }
-        i--;
+        digit--;
         base/=10;
-        pre -= base;
-        n = n - (int)( sum - i*base);//在当前i位数中的第几位
-        int numIndex = (int)((n - 1)/i);    //在当前i位数中的第几个(zero based)
-        int number = pre + numIndex + 1, digit = (int)((n - 1)%i);
-        return Integer.parseInt((Integer.toString(number)).charAt(digit) + "");
+        sum -= digit*base*9;    //0, 9, 189, ...
+        pre -= base*9;  //0, 9, 90 ...
+        long number = (n - sum - 1)/digit + pre + 1;    //0 based
+        int res = Integer.toString((int)number).charAt((int)((n - sum - 1)%digit)) - '0';
+        return res;
+        
     }
-    
-    
 }
