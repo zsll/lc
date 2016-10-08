@@ -1,35 +1,27 @@
+
+
 public class Solution {
     //Subarray Sum II in lintcode
     public int countRangeSum(int[] nums, int lower, int upper) {
         int res = 0;
         if(nums != null && nums.length > 0 && lower <= upper) {
-            int len = nums.length;
-            int [] sum = new int[len + 1];
-            for(int i = 0; i < len; i++) {
-                sum[i + 1] = sum[i] + nums[i];
-            }
-            for(int i = 1; i <= len; i++) {
-                //sum i - sum j >= lower, sum i - sum j <= upper, where j is smaller than i
-                //sum j <= sum i - lower, sum j >= sum i - upper
-                //since sum is sorted, can use binary search
-                //sum j <= sum i - lower is equivalent to find first index that sum j >= sum i - lower + 1, then minus 1
-                int l = firstGTET(sum, i - 1, sum[i] - upper), r = firstGTET(sum, i - 1, sum[i] - lower + 1);
-                res += (r - l);
+            TreeMap<Long, Integer> m = new TreeMap<Long, Integer>();  //key is sum, value is frequency
+            long sum = 0;
+            m.put(sum, 1);
+            for(int i = 0; i < nums.length; i++) {
+                sum += nums[i];
+                //sum - pre >= lower, pre <= sum - lower; sum - pre <= upper, pre >= sum - upper
+                //SortedMap<Integer, Integer> sub = m.subMap(sum - upper, sum - lower + 1);
+                for(Map.Entry<Long, Integer> e : m.subMap(sum - upper, sum - lower + 1).entrySet()) {
+                    res += e.getValue();
+                }
+                if(!m.containsKey(sum)) {
+                    m.put(sum, 0);
+                }
+                int pre = m.get(sum);
+                m.put(sum, pre + 1);
             }
         }
         return res;
-    }
-    
-    public int firstGTET(int [] sum, int end, int target) {
-        int start = 0;
-        while(start <= end) {
-            int mid = start + (end - start >> 1);
-            if(sum[mid] >= target) {
-                end = mid - 1;
-            } else {
-                start = mid + 1;
-            }
-        }
-        return start;
     }
 }
