@@ -34,9 +34,8 @@ public class Solution {
                 int newI = getNewI(nums, i);
                 while(i != newI) {
                     swap(nums, i, newI);
-                    i = newI;
-                    nums[i] = 0 - nums[i];
-                    newI = getNewI(nums, i);
+                    nums[newI] = 0 - nums[newI];
+                    newI = getNewI(nums, newI);
                 }
                 nums[i] = 0 - nums[i];
             }
