@@ -20,7 +20,7 @@ public class Solution {
                 }
             } else {
                 //a(i*i + b/a + c/a)
-                long axis = 0 - b/2/a;
+                double axis = 0 - b/2.0/a;
                 List<Long> l1 = new ArrayList<Long>();//before -b/2a
                 List<Long> l2 = new ArrayList<Long>();//Make sure both are ascending
                 int i = 0;
@@ -40,6 +40,7 @@ public class Solution {
                     } else {
                         l2.add(0, a*j*j + b*j + c);
                     }
+                    i++;
                 }
                 res = merge2(l1, l2);
             }
