@@ -1,19 +1,28 @@
 public class Solution {
     public int[][] reconstructQueue(int[][] people) {
-         List<int[]> list = new ArrayList<int[]>();
-        Arrays.sort(people,new Comparator<int[]>(){
-            @Override
-            public int compare(int[] array1,int[] array2){
-                if(array1[0]!=array2[0]){
-                    return array2[0]-array1[0];
-                }else{
-                    return array1[1]-array2[1];
+        int[][] res = people;
+        if(people != null && people.length > 0 && people[0].length == 2) {
+            List<int []> l = new ArrayList<int []>();
+            PriorityQueue<int []> q = new PriorityQueue<int []>(10, new Comparator<int []>() {
+                public int compare(int [] a, int [] b) {
+                    if(a[0] != b[0]) {
+                        return b[0] - a[0];
+                    } else {
+                        return a[1] - b[1];
+                    }
                 }
+            });
+            for(int [] p : people) {
+                q.offer(p);
             }
-        });
-        for(int[] a:people){
-            list.add(a[1],a);
+            while(!q.isEmpty()) {
+                int [] a = q.poll();
+                l.add(a[1], a);
+            }
+            for(int i = 0; i < l.size(); i++) {
+                res[i] = l.get(i);
+            }
         }
-        return (int[][])list.toArray(new int[0][0]);
+        return res;
     }
 }
