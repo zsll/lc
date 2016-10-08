@@ -26,15 +26,9 @@ Given **target** = `20`, return `false`.
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
-
-</div>
-
-<div>
-
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Amazon](/company/amazon/) [Apple](/company/apple/) [Google](/company/google/)</span></div>
+<span class="hidebutton">[Amazon](/company/amazon/) [Google](/company/google/) [Apple](/company/apple/)</span></div>
 
 <div>
 
