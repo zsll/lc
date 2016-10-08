@@ -13,7 +13,7 @@ public class Solution {
                     break;
                 } else {
                     int j = i + 1;
-                    for(; j <= Math.min(data.length, i + starting1s - 1); j++) {
+                    for(; j <= Math.min(data.length - 1, i + starting1s - 1); j++) {
                         int starting1s2 = starting1s(data[j]);
                         if(starting1s2 != 1) {
                             break;
@@ -22,8 +22,11 @@ public class Solution {
                     if(j < i + starting1s) {
                         res = false;
                         break;
+                    } else {
+                        i = j;
                     }
                 }
+                
             }
         }
         return res;
