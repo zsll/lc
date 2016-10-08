@@ -1,43 +1,45 @@
 public class Solution {
     public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<int[]> res = new ArrayList<int[]>();
-        if(nums1 != null && nums2 != null && nums1.length > 0 && nums2.length > 0 && k > 0) {
-            int len1 = nums1.length, len2 = nums2.length;
-            PriorityQueue<PosVal> pq = new PriorityQueue<PosVal>(k, new Comparator<PosVal> () {
-                 public int compare(PosVal a, PosVal b) {
-                     return a.v - b.v;
-                 }
-                
+        if(nums1 != null && nums2 != null && k > 0 && nums1.length > 0 && nums2.length > 0) {
+            PriorityQueue<PosV> pq = new PriorityQueue<PosV>(10, new Comparator<PosV>() {
+                public int compare(PosV a, PosV b) {
+                    return a.val - b.val;
+                }
             });
             HashSet<Integer> v = new HashSet<Integer>();
-            PosVal pv = new PosVal(0, 0, nums1, nums2);
-            v.add(0);
-            pq.offer(pv);
-            int count = 0;
-            while(pq.size() > 0 && count < k) {
-                pv = pq.poll();
-                int [] t = {nums1[pv.x], nums2[pv.y]};
-                res.add(t);
-                if(pv.x + 1 < len1 && !v.contains((pv.x + 1) * len2 + pv.y)) {
-                    pq.offer(new PosVal(pv.x + 1, pv.y, nums1, nums2));
-                    v.add((pv.x + 1) * len2 + pv.y);
+            int h = nums1.length, w = nums2.length;
+            int i = 0, j = 0;
+            pq.offer(new PosV(i, j, nums1[i] + nums2[j]));
+            v.add(i * w + j);
+            while(!pq.isEmpty()) {
+                PosV cur = pq.poll();
+                int [] p = {nums1[cur.i], nums2[cur.j]};
+                res.add(p);
+                if(res.size() == k) {
+                    break;
                 }
-                if(pv.y + 1 < len2 && !v.contains((pv.x) * len2 + pv.y + 1)) {
-                    pq.offer(new PosVal(pv.x, pv.y + 1, nums1, nums2));
-                    v.add((pv.x) * len2 + pv.y + 1);
+                i = cur.i;
+                j = cur.j;
+                if(i + 1 < h && !v.contains( (i + 1)*w + j)) {
+                    pq.offer(new PosV(i + 1, j, nums1[i + 1] + nums2[j]));
+                    v.add((i + 1)*w + j);
                 }
-                count++;
+                if(j + 1 < w && !v.contains( i*w + j + 1)) {
+                    pq.offer(new PosV(i, j + 1, nums1[i] + nums2[j + 1]));
+                    v.add(i*w + j + 1);
+                }
             }
         }
         return res;
     }
     
-    class PosVal {
-        int x, y, v;
-        public PosVal(int x, int y, int [] nums1, int [] nums2) {
-            this.x = x;
-            this.y = y;
-            this.v = nums1[x] + nums2[y];
+    class PosV {
+        int i, j, val;
+        public PosV(int i, int j, int val) {
+            this.i = i;
+            this.j = j;
+            this.val = val;
         }
     }
 }
