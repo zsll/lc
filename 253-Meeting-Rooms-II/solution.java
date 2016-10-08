@@ -9,18 +9,22 @@
  */
 public class Solution {
     public int minMeetingRooms(Interval[] intervals) {
-        Arrays.sort(intervals, new Comparator<Interval>() {
-            public int compare(Interval a, Interval b) {
-                return a.start - b.start;
+        int res = 0;
+        if(intervals != null && intervals.length > 0) {
+            Arrays.sort(intervals, new Comparator<Interval>() {
+              public int compare(Interval a, Interval b) {
+                  return a.start - b.start;
+              }  
+            });
+            PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+            for(Interval i : intervals) {
+                if(!pq.isEmpty() && pq.peek() <= i.start) {
+                    pq.poll();
+                }
+                pq.offer(i.end);
             }
-        });
-        PriorityQueue<Integer> endQ = new PriorityQueue<Integer>();
-        for(Interval i : intervals) {
-            if(!endQ.isEmpty() && i.start >= endQ.peek()) {  //NoteNote: is empty, else how to peek
-                endQ.poll();
-            }
-            endQ.offer(i.end);
+            res = pq.size();
         }
-        return endQ.size();
+        return res;
     }
 }
