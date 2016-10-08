@@ -1,24 +1,32 @@
 public class Solution {
     public List<String> findItinerary(String[][] tickets) {
-         LinkedList<String> res = new LinkedList<String>();
-         if(tickets != null && tickets.length > 0 && tickets[0].length == 2) {
-             HashMap<String, PriorityQueue<String>> m = new HashMap<String, PriorityQueue<String>>();
-             for(int i = 0; i < tickets.length; i++) {
-                 if(!m.containsKey(tickets[i][0])) {
-                     m.put(tickets[i][0], new PriorityQueue<String>());
-                 }
-                 m.get(tickets[i][0]).offer(tickets[i][1]);
-             }
-             
-             dfs("JFK", m, res);
-         }
-         return res;
+        List<String> res = new ArrayList<String>();
+        if(tickets != null && tickets.length > 0 && tickets[0].length == 2) {
+            HashMap<String, PriorityQueue<String>> m = build(tickets);
+            dfs("JFK", m, res);
+        }
+        return res;
     }
     
-    void dfs(String cur, HashMap<String, PriorityQueue<String>> m, LinkedList<String> res) {
-        while(m.containsKey(cur) && !m.get(cur).isEmpty()) {
-            dfs(m.get(cur).poll(), m, res);
+    void dfs(String start, HashMap<String, PriorityQueue<String>> m, List<String> res) {
+        if(m.containsKey(start)) {
+            while(!m.get(start).isEmpty()) {
+                String next = m.get(start).poll();
+                dfs(next, m, res);
+            }
         }
-        res.addFirst(cur);
+        res.add(0, start);
+    }
+    
+    HashMap<String, PriorityQueue<String>> build(String[][] tickets) {
+        HashMap<String, PriorityQueue<String>> res = new HashMap<String, PriorityQueue<String>>();
+        for(String [] t : tickets) {
+            String from = t[0], to = t[1];
+            if(!res.containsKey(from)) {
+                res.put(from, new PriorityQueue<String>());
+            }
+            res.get(from).offer(to);
+        }
+        return res;
     }
 }
