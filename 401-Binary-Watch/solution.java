@@ -2,11 +2,10 @@ public class Solution {
     public List<String> readBinaryWatch(int num) {
         List<String> res = new ArrayList<String>();
         for(int i = 0; i <= num; i++) {
-            int j = num - i;
-            List<String> hours = getHours(i);
-            List<String> minutes = getMinutes(j);
-            for(String h : hours) {
-                for(String m : minutes) {
+            List<String> l1 = pick(i, true);
+            List<String> l2 = pick(num - i, false);
+            for(String h : l1) {
+                for(String m : l2) {
                     res.add(h + ":" + m);
                 }
             }
@@ -14,45 +13,41 @@ public class Solution {
         return res;
     }
     
-    //1 2 4 8, So it's subset of size 0 to num out of 4, and needs to make sure the value is between 0 to 60
-    List<String> getHours(int num) {
-        List<String> res = new ArrayList<String>();
-        if(num >= 0 && num <= 4) {
-            int cur = 0;
-            dfs(0, 0, num, true, cur, res);
-        }
-        return res;
-    }
-    
-    void dfs(int start, int level, int target, boolean isHour, int cur, List<String> res) {
-        int [] nums = {1, 2, 4, 8, 16, 32};
-        if(level == target && (isHour && cur >= 0 && cur <= 11 || !isHour && cur >= 0 && cur <= 59)) {
-            if(isHour) {
-                res.add(cur + "");
-            } else {
-                if(cur <= 9) {
-                    
-                    res.add("0" + cur);
-                } else {
-                    
-                    res.add(cur + "");
+    List<String> pick(int num, boolean isHour) {
+        int [] hours = {1, 2, 4, 8};
+        int [] minutes = {1, 2, 4, 8, 16, 32};
+        int [] a = isHour ? hours : minutes;
+        Queue<Integer> preIndex = new LinkedList<Integer>();
+        Queue<Integer> sum = new LinkedList<Integer>();
+        sum.offer(0);
+        preIndex.offer(-1);
+        int count = 0;
+        while(count < num && !sum.isEmpty()) {  //When sum is empty, it means it's impossible to get anything
+            int size = preIndex.size();
+            for(int i = 0; i < size; i++) {
+                int preSum = sum.poll();
+                int preI = preIndex.poll();
+                for(int j = preI + 1; j < a.length; j++) {
+                    sum.offer(preSum + a[j]);
+                    preIndex.offer(j);
                 }
             }
-        } else if (level < target) {
-            for(int i = start; i < nums.length; i++) {
-                cur += nums[i];
-                dfs(i + 1, level + 1, target, isHour, cur, res);
-                cur -= nums[i];
-            }
+            count++;
         }
-    }
-    
-    //1 2 4 8 16 32, subset of size 0 to num out of 6, and needs to make sure the value is between 0 to 60
-    List<String> getMinutes(int num) {
         List<String> res = new ArrayList<String>();
-        if(num >= 0 && num <= 6) {
-            int cur = 0;
-            dfs(0, 0, num, false, cur, res);
+        while(!sum.isEmpty()) {
+            int cur = sum.poll();
+            if(isHour ) {
+                if(cur < 12) {
+                    res.add(Integer.toString(cur));
+                }
+            } else {
+                if(cur < 10) {
+                    res.add("0" + cur);
+                } else if (cur < 60) {
+                    res.add(Integer.toString(cur));
+                }
+            }
         }
         return res;
     }
