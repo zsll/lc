@@ -3,30 +3,41 @@ public class Solution {
         int mid = findKth2(nums, (nums.length + 1)/2);
 	        threeWaySort(nums, mid);
 	        /**
+	         * 
+	         * 
 	         * 0 1 2 3 4 5 6
-	         * 0 4 1 5 2 6 3
+	         * 3 6 2 5 1 4 0
 	         * 
-	         * 0 -> 0
-	         * 1 -> 2
-	         * 2 -> 4
-	         * 3 -> 6
+	         * 0 -> 6
+	         * 1 -> 4
+	         * 2 -> 2
+	         * 3 -> 0
 	         * 
-	         * So new index = i*2
+	         * So new index = (len/2 - i)*2
 	         * len = 7
-	         * 4 -> 1
+	         * 
+	         * 
+	         * 4 -> 5
 	         * 5 -> 3
-	         * 6 -> 5
-	         * len - new = 2*(len - i)
-	         * new = len - 2*(len - i) = 2*i - len
+	         * 6 -> 1
+	         * 
+	         * new = (len - i)*2 - 1
 	         * 
 	         * NoteNote, the mapping for second half differs for odd/even length
 	         * 0 1 2 3 4 5
-	         * 0 3 1 4 2 5
+	         * 2 5 1 4 0 3
 	         * len = 6
-	         * 3 -> 1
+	         * 0 -> 4
+	         * 1 -> 2
+	         * 2 -> 0
+	         * new index = (len/2 - 1 - i)*2
+	         * 
+	         * 3 -> 5
 	         * 4 -> 3
-	         * 5 -> 5
-	         * new = i*2 -len + 1
+	         * 5 -> 1
+	         * new = (len - i)*2 - 1
+	         * 
+	         * 
 	         */ 
 	         remap(nums);
 	    }
