@@ -15,3 +15,21 @@ The number of people is less than 1,100.
 Output:
 [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
 </pre>
+
+<div>
+
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
+
+<span class="hidebutton">[Google](/company/google/)</span></div>
+
+<div>
+
+<div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
+
+<span class="hidebutton">[Greedy](/tag/greedy/)</span></div>
+
+<div>
+
+<div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
+
+<span class="hidebutton">[(H) Count of Smaller Numbers After Self](/problems/count-of-smaller-numbers-after-self/)</span></div>
