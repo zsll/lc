@@ -1,19 +1,35 @@
 public class Solution {
+    //Subarray Sum II in lintcode
     public int countRangeSum(int[] nums, int lower, int upper) {
-         int count = 0;
-        long[] sum = new long[nums.length+1];
-        TreeMap<Long, Integer> map = new TreeMap<Long, Integer>(); //key is sum, value is its frequency
-        map.put(0L, 1);
-        for(int i=0; i<nums.length; i++){
-            sum[i+1] = sum[i]+nums[i];
-            map.put(sum[i+1], map.containsKey(sum[i+1])? map.get(sum[i+1])+1: 1);	//count of occorance of sum[i+1] before i 
+        int res = 0;
+        if(nums != null && nums.length > 0 && lower <= upper) {
+            int len = nums.length;
+            int [] sum = new int[len + 1];
+            for(int i = 0; i < len; i++) {
+                sum[i + 1] = sum[i] + nums[i];
+            }
+            for(int i = 1; i <= len; i++) {
+                //sum i - sum j >= lower, sum i - sum j <= upper, where j is smaller than i
+                //sum j <= sum i - lower, sum j >= sum i - upper
+                //since sum is sorted, can use binary search
+                //sum j <= sum i - lower is equivalent to find first index that sum j >= sum i - lower + 1, then minus 1
+                int l = firstGTET(sum, i - 1, sum[i] - upper), r = firstGTET(sum, i - 1, sum[i] - lower + 1);
+                res += (r - l);
+            }
         }
-        for(int i=0; i<nums.length; i++){
-            map.put(sum[i], map.get(sum[i])-1);
-            if(map.get(sum[i]) == 0) map.remove(sum[i]);
-            for(Map.Entry<Long, Integer> entry: map.subMap(sum[i]+lower, sum[i]+upper+1).entrySet())
-                count += entry.getValue();
+        return res;
+    }
+    
+    public int firstGTET(int [] sum, int end, int target) {
+        int start = 0;
+        while(start <= end) {
+            int mid = start + (end - start >> 1);
+            if(sum[mid] >= target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
         }
-        return count;
+        return start;
     }
 }
