@@ -46,6 +46,7 @@ public class Solution {
                             PosH p = new PosH(x, y, heightMap[x][y]);
                             pq.offer(p);
                         }
+                        v.add(x*w + y);
                     }
                 }
             }
