@@ -24,3 +24,21 @@ The above image represents the elevation map `[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,
 
 ![](https://leetcode.com/static/images/problemset/rainwater_fill.png)  
 After the rain, water are trapped between the blocks. The total volume of water trapped is 4.
+
+<div>
+
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
+
+<span class="hidebutton">[Google](/company/google/) [Twitter](/company/twitter/)</span></div>
+
+<div>
+
+<div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
+
+<span class="hidebutton">[Breadth-first Search](/tag/breadth-first-search/) [Heap](/tag/heap/)</span></div>
+
+<div>
+
+<div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
+
+<span class="hidebutton">[(H) Trapping Rain Water](/problems/trapping-rain-water/)</span></div>
