@@ -25,9 +25,9 @@ Special thanks to [@Stomach_ache](https://leetcode.com/stomach_ache) for adding 
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Google](/company/google/)</span></div>
 
 <div>
 
