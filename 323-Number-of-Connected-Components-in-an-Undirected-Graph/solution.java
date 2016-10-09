@@ -41,7 +41,7 @@ Output:
 Expected:
 2
                  */ 
-                if((edges[cur][i] == 1 || edges[i][cur] == 1) && !q.contains(i)) {
+                if((edges[cur][i] == 1 || edges[i][cur] == 1) && !v.contains(i)) {
                     q.offer(i);
                     v.add(i);
                 }
