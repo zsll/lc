@@ -11,9 +11,9 @@ Given envelopes = `[[5,4],[6,4],[6,7],[2,3]]`, the maximum number of envelopes y
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Google](/company/google/)</span></div>
 
 <div>
 
