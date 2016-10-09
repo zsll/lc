@@ -1,7 +1,9 @@
 public class Solution {
      
     public String minAbbreviation(String target, String[] dictionary) {
-        
+        if(dictionary.length == 0) {
+            return "" + target.length();
+        }
         return generateAbbreviations(target, dictionary);
     }
     
