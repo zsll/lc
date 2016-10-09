@@ -1,40 +1,40 @@
 public class Solution {
-     public String rearrangeString(String str, int k) {
-            int length = str.length();
-            int[] count = new int[26];
-            int[] valid = new int[26];
-            for(int i=0;i<length;i++){
-                count[str.charAt(i)-'a']++;
+    public String rearrangeString(String str, int k) {
+        String res = "";
+        if(str != null) {
+            int len = str.length(), i = 0;
+            int [] count = new int[26];
+            int [] nextValidPos = new int[26];
+            char [] a = new char[len];
+            for(char c : str.toCharArray()) {
+                count[c - 'a']++;
             }
-            StringBuilder sb = new StringBuilder();
-            for(int index = 0;index<length;index++){
-                int candidatePos = findValidMax(count, valid, index);
-                if( candidatePos == -1) return "";
-                count[candidatePos]--;
-                valid[candidatePos] = index+k;
-                sb.append((char)('a'+candidatePos));
+            while(i < len) {
+                char c = find(count, nextValidPos, i);
+                if(c == 0) {
+                    break;
+                }
+                a[i] = c;
+                count[c - 'a']--;
+                nextValidPos[c - 'a'] += k;
+                i++;
             }
-            return sb.toString();
+            if(i == len) {
+                res = new String(a);
+            }
         }
-        
-        /**
-         * index is the position to fill
-         * @param count
-         * @param valid
-         * @param index
-         * @return
-         */
-       private int findValidMax(int[] count, int[] valid, int index){
-           int max = 0;
-           int candidatePos = -1;
-           for(int i=0;i<count.length;i++){//There are at most 26 chars, so complexity would be at most 26N
-               if(count[i]>max && index>=valid[i]){	
-            	   //Find char with largest frequency and valid position is larger than or equal to the position to fill
-                   max = count[i];
-                   candidatePos = i;
-               }
-           }
-           return candidatePos;
-       }
-
+        return res;
+    }
+    
+    char find(int [] count, int [] nextValidPos, int pos) {
+        char c = 0;
+        int maxValidCount = Integer.MIN_VALUE;
+        for(int i = 0; i < count.length; i++) {
+            if(nextValidPos[i] <= pos && maxValidCount <= count[i] && count[i] > 0) {
+                maxValidCount = count[i];
+                c = (char)(i + 'a');
+            }
+        }
+        return c;
+    }
 }
