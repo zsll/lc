@@ -1,20 +1,19 @@
 public class Solution {
     public boolean isValidSerialization(String preorder) {
-        String [] a = preorder.split(",");
-        LinkedList<String> l = new LinkedList<String>();
-        for(String c : a) {
-            l.add(c);
-            int s = l.size();
-            while(s >= 3 && l.get(s - 1).equals("#") && l.get(s - 2).equals("#")
-                && !l.get(s - 3).equals("#")) {
-                l.removeLast();
-                l.removeLast();
-                l.removeLast();
+        boolean res = true;
+        if(preorder != null && preorder.length() > 0) {
+            LinkedList<String> s = new LinkedList<String>();
+            String [] a = preorder.split(",");
+            for(String i : a) {
+                while(s.size() >= 2 && i.equals("#") && s.get(s.size() - 1).equals("#") && !s.get(s.size() - 2).equals("#")) {
+                    s.removeLast();
+                    s.removeLast();
+                } 
+                s.add(i);
                 
-                l.add("#");
-                s = l.size();   //NoteNote
-            } 
+            }
+            res = s.size() == 1 && s.get(s.size() - 1).equals("#");
         }
-        return l.size() <= 1 && l.get(0).equals("#");
+        return res;
     }
 }
