@@ -77,25 +77,25 @@ Expected:
         }
         return res;
     }
-    //from just one array, pick up k numbers to form a large number
+    
     int [] pick(int [] a, int k) {
         if(k > a.length) {
             return null;
         }
-        
         int [] res = new int[k];
-        int prePickedPos = -1, len = a.length;
-        for(int i = 0; i < k; i++) {
-            int maxPos = prePickedPos + 1;
-            for(int j = prePickedPos + 2; len - j >= k - i; j++) {
-                if(a[j] > a[maxPos]) {
-                    maxPos = j;
+        int len = a.length, pre = -1;  //pick up nums from it
+        while(k > 0) {
+            int maxPos = pre + 1;
+            for(int i = pre + 2; k <= a.length - i; i++) {
+                if(a[i] > a[maxPos]) {
+                    maxPos = i;
                 }
             }
-            res[i] = a[maxPos];
-            prePickedPos = maxPos;
+            res[res.length - k] = a[maxPos];
+            
+            pre = maxPos;
+            k--;
         }
         return res;
     }
-    
 }
