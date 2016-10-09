@@ -8,24 +8,27 @@
  */
 public class Solution {
 
-    HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    ListNode head;
+    
     /** @param head The linked list's head.
         Note that the head is guaranteed to be not null, so it contains at least one node. */
     public Solution(ListNode head) {
-        int i = 0;
-        while(head != null) {
-            map.put(i, head.val);
-            head = head.next;
-            i++;
-        }
+        this.head = head;
     }
     
     /** Returns a random node's value. */
     public int getRandom() {
-        int size = map.size();
-        Random r = new Random();
-        int i = r.nextInt(size);
-        return map.get(i);
+        ListNode cur = head;
+        int val = 0, size = 1;
+        while(cur != null) {
+            Random r = new Random();
+            if(r.nextInt(size) == 0) {
+                val = cur.val;
+            }
+            cur = cur.next;
+            size++;
+        }
+        return val;
     }
 }
 
