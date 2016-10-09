@@ -1,24 +1,26 @@
 public class Solution {
     public int maxCoins(int[] nums) {
-        if(nums == null) {
-            return 0;
-        }
-        List<Integer> l = new ArrayList<Integer>();
-        l.add(1);
-        for(int i : nums) {
-            l.add(i);
-        }
-        l.add(1);
-        int len = l.size();
-        int [][] dp = new int[len][len];
-        for(int diff = 2; diff < len; diff++) { //diff between i and j
-            for(int i = 0; i + diff < len; i++) {
-                int j = diff + i;
-                for(int k = i + 1; k < j; k++) {
-                    dp[i][j] = Math.max(dp[i][j], dp[i][k] + dp[k][j] + l.get(i)*l.get(k)*l.get(j));
+        int res = 0;
+        if(nums != null && nums.length > 0) {
+            int len = nums.length;
+            int [] a = new int[len + 2];
+            len += 2;
+            for(int i = 1; i < len - 1; i++) {
+                a[i] = nums[i - 1];
+            }
+            a[0] = 1;
+            a[len - 1] = 1;
+            int [][] dp = new int[len][len];
+            for(int diff = 2; diff < len; diff++) {
+                for(int row = 0; row + diff < len; row++) {
+                    int col = row + diff;
+                    for(int k = row + 1; k < col; k++) {
+                        dp[row][col] = Math.max(dp[row][col], dp[row][k] + dp[k][col] + a[k]*a[row]*a[col]);
+                    }
                 }
             }
+            res = dp[0][len - 1];
         }
-        return dp[0][len - 1];
+        return res;
     }
 }
