@@ -19,13 +19,8 @@ public class Solution {
         while(i < l1 && i < l2 && a1[i] == a2[i]) {
             i++;
         }
-        if(i < l1 && i < l2) {
-            return a1[i] - a2[i];
-        } else if(i == l1) {
-            return -1;
-        } else {
-            return 1;
-        }
+        if(i == a1.length) return 0;
+        return a1[i] - a2[i];
     }
     
     int [] merge(int [] a1, int [] a2) {
