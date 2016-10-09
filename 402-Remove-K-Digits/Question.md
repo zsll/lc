@@ -34,13 +34,13 @@ Explanation: Remove all the digits from the number and it is left with nothing w
 
 <div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton">[Google](/company/google/)</span></div>
+<span class="hidebutton">[Google](/company/google/) [Snapchat](/company/snapchat/)</span></div>
 
 <div>
 
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
-<span class="hidebutton">[Stack](/tag/stack/)</span></div>
+<span class="hidebutton">[Stack](/tag/stack/) [Greedy](/tag/greedy/)</span></div>
 
 <div>
 
