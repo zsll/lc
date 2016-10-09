@@ -1,46 +1,35 @@
 public class Solution {
+    public String removeKdigits(String num, int k) {
+        String res = "";
+        /**
+         * Runtime Error Message:
+Line 11: java.lang.NumberFormatException: For input string: ""
+Last executed input:
+"10"
+2
+         */ 
+        if(num != null && k >= 0 && num.length() > k) {
+            String next = num;  //NoteNote the initialization incase k = 0;
+            while(k > 0) {
+                next = remove1(num);
+                k--;
+                num = next;
+            }
+            res = Integer.toString(Integer.parseInt(next));
+        }
+        return res;
+    }
     
-	public String removeKdigits(String A, int k) {
-		if (A == null || A.length() <= k) {
-			return "0";
-		}
-		if (k == 0) {
-			return A;
-		}
-		StringBuffer b = new StringBuffer(A);
-		int count = 0;
-		// for(int j = 0; j < k; j++) {
-		for (int i = 0; i < b.length(); i++) {
-			if (isDown(b, i)) {
-				b.deleteCharAt(i);
-				count++;
-				if (k == count)
-					break;
-				if (i == 0) {
-					i--;
-				} else {
-					i -= 2; // looking back
-				}
-			}
-		}
-		// }
-
-		/**
-		 * Wrong Answer
-		 * 
-		 * 总耗时: 612 ms 4 / 13 数据通过测试. 输入 90249, 2 输出 024 期望答案 24
-		 */
-		while (b.length() > 1 && b.charAt(0) == '0') {
-			b.deleteCharAt(0);
-		}
-		return b.toString();
-	}
-
-	public boolean isDown(StringBuffer b, int i) {
-		boolean result = false;
-		if (i == b.length() - 1 || b.charAt(i) > b.charAt(i + 1)) {
-			result = true;
-		}
-		return result;
-	}
+    String remove1(String s) {
+        StringBuffer sb = new StringBuffer(s);
+        int i = 0;
+        while(i < sb.length() - 1) {
+            if(sb.charAt(i) > sb.charAt(i + 1)) {
+                break;
+            }
+            i++;
+        }
+        sb.deleteCharAt(i);
+        return sb.toString();
+    }
 }
