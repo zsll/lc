@@ -1,23 +1,25 @@
 public class Solution {
     public String removeDuplicateLetters(String s) {
         String res = s;
-        if(s != null && s.length() > 1) {
-            int [] m = new int[256];
-            for(int i = 0; i < s.length(); i++) {
-                m[s.charAt(i)]++;
+        if(s != null && s.length() > 0) {
+            int [] cnt = new int[255];
+            for(char c : s.toCharArray()) {
+                cnt[c]++;
             }
-            int pos = 0;
+            char min = 255;
+            int minPos = 0;
             for(int i = 0; i < s.length(); i++) {
-                if(s.charAt(i) < s.charAt(pos)) {
-                    pos = i;
+                char c = s.charAt(i);
+                if(c < min) {
+                    min = c;
+                    minPos = i;
                 }
-                if(m[s.charAt(i)] == 1) {
+                cnt[c]--;
+                if(cnt[c] == 0) {
                     break;
-                } else {
-                    m[s.charAt(i)]--;
                 }
             }
-            res = s.charAt(pos) + removeDuplicateLetters(s.substring(pos).replace("" + s.charAt(pos), ""));
+            res = min + removeDuplicateLetters(s.substring(minPos + 1).replaceAll(min + "", ""));//NoteNote start from minPos, needs to use replaceAll
         }
         return res;
     }
