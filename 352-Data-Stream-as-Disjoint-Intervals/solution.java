@@ -8,32 +8,41 @@
  * }
  */
 public class SummaryRanges {
-    TreeMap<Integer, Interval> tree;//key is start of interval, key is interval
-
-        public SummaryRanges() {
-            tree = new TreeMap<>();
-        }
-
-        public void addNum(int val) {
-            if(tree.containsKey(val)) return;
-            Integer l = tree.lowerKey(val);//NoteNote, this is strictly less than
-            Integer h = tree.higherKey(val);	//NoteNote, this is strictly greater than
-            if(l != null && h != null && tree.get(l).end + 1 == val && h == val + 1) {
-                tree.get(l).end = tree.get(h).end;
-                tree.remove(h);
-            } else if(l != null && tree.get(l).end + 1 >= val) {
-                tree.get(l).end = Math.max(tree.get(l).end, val);	//It's possible the interval on left covers the val
-            } else if(h != null && h == val + 1) {
-                tree.put(val, new Interval(val, tree.get(h).end));
-                tree.remove(h);
+    TreeMap<Integer, Interval> m = new TreeMap<Integer, Interval>();
+    
+    /** Initialize your data structure here. */
+    public SummaryRanges() {
+        
+    }
+    
+    public void addNum(int val) {
+        if(m.containsKey(val)) return;  //NoteNote, else it's may overwrite m.get(val)
+        Integer pre = m.lowerKey(val), next = m.higherKey(val);
+        if(pre != null && m.get(pre).end >= val) {
+            return;
+        } else {
+            if(pre != null && next != null && m.get(pre).end == val - 1 && val == next - 1) {
+                Interval cur = m.remove(next);
+                m.get(pre).end = cur.end;
+            } else if (pre != null && m.get(pre).end == val - 1) {
+                m.get(pre).end = val;
+            } else if (next != null && val == next - 1) {
+                Interval cur = m.remove(next);
+                cur.start = val;
+                m.put(val, cur);
             } else {
-                tree.put(val, new Interval(val, val));
+                m.put(val, new Interval(val, val));
             }
         }
-
-        public List<Interval> getIntervals() {
-            return new ArrayList<>(tree.values());
+    }
+    
+    public List<Interval> getIntervals() {
+        List<Interval> res = new ArrayList<Interval>();
+        for(Map.Entry<Integer, Interval> e : m.entrySet()) {
+            res.add(e.getValue());
         }
+        return res;
+    }
 }
 
 /**
