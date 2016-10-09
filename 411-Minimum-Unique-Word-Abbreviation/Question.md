@@ -25,18 +25,18 @@ Each **number** or letter in the abbreviation is considered length = 1\. For exa
 
 <div>
 
-<div id="company_tags" class="btn btn-xs btn-warning">Hide Company Tags</div>
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-<span class="hidebutton" style="display: inline;">[Google](/company/google/)</span></div>
+<span class="hidebutton">[Google](/company/google/)</span></div>
 
 <div>
 
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
-<span class="hidebutton" style="display: inline; opacity: 0.42437;">[Backtracking](/tag/backtracking/) [Bit Manipulation](/tag/bit-manipulation/)</span></div>
+<span class="hidebutton">[Backtracking](/tag/backtracking/) [Bit Manipulation](/tag/bit-manipulation/)</span></div>
 
 <div>
 
-<div id="similar" class="btn btn-xs btn-warning">Hide Similar Problems</div>
+<div id="similar" class="btn btn-xs btn-warning">Show Similar Problems</div>
 
-<span class="hidebutton" style="display: inline;">[(M) Generalized Abbreviation](/problems/generalized-abbreviation/) [(E) Valid Word Abbreviation](/problems/valid-word-abbreviation/)</span></div>
+<span class="hidebutton">[(M) Generalized Abbreviation](/problems/generalized-abbreviation/) [(E) Valid Word Abbreviation](/problems/valid-word-abbreviation/)</span></div>
