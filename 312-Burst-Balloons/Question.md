@@ -25,12 +25,12 @@ Special thanks to [@dietpepsi](https://leetcode.com/discuss/user/dietpepsi) for 
 
 <div>
 
-[Subscribe](/subscribe/) to see which companies asked this question
+<div id="company_tags" class="btn btn-xs btn-warning">Show Company Tags</div>
 
-</div>
+<span class="hidebutton">[Google](/company/google/) [Snapchat](/company/snapchat/)</span></div>
 
 <div>
 
 <div id="tags" class="btn btn-xs btn-warning">Show Tags</div>
 
-<span class="hidebutton">[Divide and Conquer](/tag/divide-and-conquer/) [Dynamic Programming](/tag/dynamic-programming/)</span></div>
+<span class="hidebutton">[Dynamic Programming](/tag/dynamic-programming/) [Divide and Conquer](/tag/divide-and-conquer/)</span></div>
