@@ -24,7 +24,7 @@ Output:
 Expected:
 ["0.0.0.0"]
 */
-                        continue;
+                        break;
                     }
                     int value = Integer.parseInt(subS);
                     
