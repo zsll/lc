@@ -1,6 +1,6 @@
 public class Solution {
     public void wiggleSort(int[] nums) {
-        int mid = findKth2(nums, (nums.length + 1)/2);
+       int mid = findKth2(nums, (nums.length + 1)/2);
 	        threeWaySort(nums, mid);
 	        /**
 	         * 
@@ -54,7 +54,6 @@ public class Solution {
 	                }
 	                nums[i] = 0 - nums[i];
 	            }
-	            
 	        }
 	        for(int i = 0; i < nums.length; i++) {
 	        	nums[i] = 0 - nums[i];
@@ -119,7 +118,7 @@ public class Solution {
 	        nums[start] = t;
 	        return start;
 	    }
-	    void swap(int [] a, int i, int j) {
+	    	    void swap(int [] a, int i, int j) {
 	        int t = a[i];
 	        a[i] = a[j];
 	        a[j] = t;
